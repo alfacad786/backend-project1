@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Aad Donor</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include("includes/navebar.ejs") %>
+   
+    <h1>Add donor</h1>
+
+    <div class="addform">
+    
+      <form method="post" action="/donor" class="form">
+        <label for="username">Username : </label>
+          <input
+          name="username"
+          type="text"
+          class="inputadd"
+          value="<%= don.username %>"
+          readonly
+        />
+        <label for="name">Name : </label>
+        <input
+          name="name"
+          type="text"
+          class="inputadd"
+          value=" <%= don.name %>"
+          readonly
+        />
+
+        <div class="d1">
+          <label for="payment">payment : </label
+          ><input name="payment" type="number" class="inputadd" />
+          <label for="date">date : </label
+          ><input
+            name="date"
+            type="date"
+            class="inputadd"
+            required
+            pattern="\d{2}-\d{2}-\d{4}"
+            
+          />
+
+          <button class="=btn" type="submit">Add</button>
+        </div>
+      </form>
+      <div id="bott">
+      <button id="btnback">BACK</button>
+      <form method="get" action="/donor/us">
+        <button class="btn">Search</button>
+      </form>
+      <form method="get" action="/donor">
+        <button class="btn">Homepage</button>
+      </form>
+    </div>
+    </div>
+    
+
+    <script src="/app.js"></script>
+   
+    
+  </body>
+</html>

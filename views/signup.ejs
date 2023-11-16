@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOGING</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include("includes/navebar.ejs") %>
+    <div class="homain">
+      
+      <h1>PLEASE INSERT THE USERNAME</h1>
+
+      <div class="addform">
+        <form method="get" action="/donor/new"  class="form">
+          <label for="username">username :</label><input name="username" type="text" id="userinput" />
+           
+          <button class="=btn" type="submit">Loging</button>
+        </form>
+        <form method="get" action="/donor/total">
+          <button class="btn">total list</button>
+        </form>
+      
+      </div>
+    </div>
+  </body>
+</html>

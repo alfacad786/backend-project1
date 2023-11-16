@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>knc trust bharuch List</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include("includes/navebar.ejs") %>
+    <div class="homain">
+      
+      <h1>Donor list</h1>
+
+      <div class="ta">
+        <table>
+          <thead>
+            <tr>
+              <th>username</th>
+              <th>name</th>
+              <th>payment</th>
+              <th>date(dd/mm/yy)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+            <% for(doner of do1){
+                 %>
+
+            <tr>
+              <td><%=doner.username%></td>
+              <td><%=doner.name%></td>
+              <td><%=doner.payment%></td>
+              <td><%=doner.date%></td>
+            </tr>
+            <tr>
+                  
+                  
+                  
+            </tr>
+              <%} %>
+              
+            </tr>
+          </tbody>
+        </table>
+
+        <div id="btn">
+          <form method="get" action="/donor">
+            <button class="btn">Homepage</button>
+          </form>
+          <form method="get" action="/donor/username"><button class="btn">loging</button></form>
+
+          <form method="get" action="./delet.ejs"><button class="btn">delet</button></form>
+
+          <form method="get" action="/donor/us">
+            <button class="btn">Search</button>
+          </form>
+
+          <form method="get" action="/donor/total">
+            <button class="btn">total list</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
