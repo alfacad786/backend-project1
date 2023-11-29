@@ -7,18 +7,49 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <%- include("includes/navebar.ejs") %>
+    <%- include("includes/registrationnav.ejs") %>
     <div class="errerform">
       <h2 id="h2">INVALID USERNAME PLEASE SIGN UP</h2>
       <div class="homain1">
         <h3 id="h3">NEW MEMBER REGISTRATION</h3>
+        <h5 id="h5">alert&sigup.ejs</h5>
 
         <div class="newaddform">
-          <form method="post" action="/donor/newmember" class="signupform">
+          <form method="post" action="/trust/newmember" class="signupform">
             <div class="subdiv">
-              <label for="username">username :</label
-              ><input name="username" type="text" id="userinput" class="inp" />
+              <label for="username"> username :</label
+              ><input 
+              name="username" 
+              type="text" 
+              id="userinput" 
+              class="inp" 
+              />
 
+              <label for="name">name :</label
+              ><input 
+              name="name" 
+              type="text" 
+              id="name" 
+              class="inp" 
+              />
+
+              <label for="email">Email :</label
+              ><input 
+              name="email" 
+              type="email" 
+              id="email" 
+              class="inp" 
+              />
+
+              <label for="city"> city : </label>
+              <input 
+              name="city" 
+              type="text" 
+              id="city" 
+              class="inp" 
+              />
+            </div>
+            <div class="subdiv">
               <label for="password">password :</label
               ><input
                 name="password"
@@ -26,24 +57,31 @@
                 id="password"
                 class="inp"
               />
-            </div>
+              <label for="mobile"> Mobile : </label
+              >
+              <input 
+              name="mobile" 
+              type="number" 
+              id="mobile" 
+              class="inp" 
+              />
 
-            <div class="subdiv">
-              <label for="Mobile">Mobile No :</label
-              ><input name="Mobile" type="number" id="Mobile" class="inp" />
-
-              <label for="email">Email :</label
-              ><input name="email" type="email" id="email" class="inp" />
+              <label for="area"> area : </label
+              >
+              <input 
+              name="area" 
+              type="text" 
+              id="area" 
+              class="inp" 
+              />
             </div>
 
             <button class="=btn" type="submit">singup</button>
           </form>
 
           <div id="btn">
-            <form method="get" action="/donor/total">
-              <button class="btn">total list</button>
-            </form>
-            <form method="get" action="/donor/username">
+            
+            <form method="get" action="/trust">
               <button class="=btn" type="submit">BACK</button>
             </form>
           </div>

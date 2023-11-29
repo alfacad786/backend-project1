@@ -8,29 +8,43 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <%- include("includes/navebar.ejs") %>
-   
+    <%- include("includes/newdonor.ejs") %>
+
     <h1 id="h1">Add donor</h1>
+    <h5 id="h5">add.ejs <%=data._id%></h5>
 
     <div class="addform">
-    
-      <form method="post" action="/donor" class="form">
-        <label for="username">Username : </label>
+      <form method="post" action="/trust/<%=data._id%>/addpay" class="form">
+        <div class="d0">
+          <label for="userName">userName : </label>
           <input
-          name="username"
-          type="text"
-          class="inputadd"
-          value="<%= don.username %>"
-          readonly
-        />
-        <label for="name">Name : </label>
-        <input
-          name="name"
-          type="text"
-          class="inputadd"
-          value=" <%= don.name %>"
-          readonly
-        />
+            name="userName"
+            value="<%=data.userName%>"
+            type="text"
+            class="inputaddtop"
+            readonly
+          />
+        </div>
+        <div class="d0">
+          <label for="name">Name :</label>
+          <input
+            name="name"
+            type="text"
+            class="inputaddtop"
+            value="<%=data.name%>"
+            readonly
+          />
+        </div>
+        <div class="d0">
+          <label for="email">email : </label>
+          <input
+            name="email"
+            type="text"
+            class="inputaddtop"
+            value="<%=data.email%>"
+            readonly
+          />
+        </div>
 
         <div class="d1">
           <label for="payment">payment : </label
@@ -42,26 +56,22 @@
             class="inputadd"
             required
             pattern="\d{2}-\d{2}-\d{4}"
-            
           />
 
           <button class="=btn" type="submit">Add</button>
         </div>
       </form>
       <div id="bott">
-      <button id="btnback">BACK</button>
-      <form method="get" action="/donor/us">
-        <button class="btn">Search</button>
-      </form>
-      <form method="get" action="/donor">
-        <button class="btn">Homepage</button>
-      </form>
+        <button id="btnback">BACK</button>
+        <form method="get" action="/trust/us">
+          <button class="btn">Search</button>
+        </form>
+        <form method="get" action="/trust">
+          <button class="btn">Homepage</button>
+        </form>
+      </div>
     </div>
-    </div>
-    
 
     <script src="/app.js"></script>
-   
-    
   </body>
 </html>

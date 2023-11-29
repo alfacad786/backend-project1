@@ -5,6 +5,8 @@ const port = 8080;
 const path = require("path");
 const mongoose = require("mongoose");
 const { strict } = require("assert");
+const userdetail = require("./models/userdetail.js");
+const user1 = require("./models/addpayment.js");
 //============================================
 async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/trust");
@@ -26,170 +28,192 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
-// ===============================================
-const DonorSchema = new mongoose.Schema(
-  {
-    name:String,
-    area:String,
-    mobile:Number,
-    payment:Number
-  }
-)
-// mongodb me detabase  me collections create karne ke liya ===========
-const Donor =mongoose.model("Donor",DonorSchema)
-//====================================================================
-const D2 =new Donor({
-  name: "aaliya",
-  area:"ghooshwad",
-  mobile:9426882690,
-  payment: 3000
-});
-D2.save()
-.then((res)=>{
-  console.log(res)
-})
-.catch((err)=>{
-  console.log(err)
-});
-
-
-
-
-
-
-
-
-let member = [];
-
-let donor = [
-  {
-    username: "asifshaikh",
-    name: "Asifiqbal",
-    payment: 5000,
-    date: "2023-12-08",
-  },
-  {
-    username: "ayanshaikh",
-    name: "ayan",
-    payment: 4000,
-    date: "2023-02-06",
-  },
-  {
-    username: "aaliyashaikh",
-    name: "aaliya",
-    payment: 7000,
-    date: "2022-12-21",
-  },
-];
-// =========new registration member REQUEST=======================================
-app.post("/donor/newmember", (req, res) => {
-  // let username = req.params.p.i
-  let { username, password, Mobile, email } = req.body;
-  member.push({ username, password, Mobile, email });
-  res.redirect("/donor/username");
-
-  console.log("new", "/donor/newmember", req.body);
-});
-
-// registration USER ADD DATA member REQUEST==========================================================
-
-app.post("/donor", (req, res) => {
-  // let username = req.params.p.i
-  let { username, name, payment, date } = req.body;
-  donor.push({ username, name, payment, date });
-  res.redirect("/donor/username");
-
-  console.log("new", req.body);
-});
-
+// ===========================================================================================
 // =============LISTEN REQUEST=======================================
 
 app.listen(port, () => {
   console.log("listen the server");
 });
+
+// =============meddleware======================
+app.use("/", (req, res, next) => {
+  console.log("req.path");
+  next();
+});
+
+// app.use("/trust/user", (req, res, next) => {
+//   console.log("/trust/us");
+//   res.redirect("/trust/username");
+// });
+
+// app.use("/trust/total", (req, res, next) => {
+//   let tokan=req.query
+
+//   console.log("/trust/us");
+//   res.redirect("/trust/username");
+// });
+
+
+
+// =============POST REQUEST======================
+// =========================
+// =========================
+// =========new registration member REQUEST=======================================
+app.post("/trust/newmember", (req, res) => {
+  // let username = req.params.p.i
+  let { username, password, name, city, area, mobile, email } = req.body;
+
+  const newUserdetail = new userdetail({
+    userName: username,
+    passWord: password,
+    name: name,
+    city: city,
+    area: area,
+    mobile: mobile,
+    email: email,
+  });
+  newUserdetail
+    .save()
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  res.redirect("/trust/username");
+
+  // console.log(req.body);
+});
+
+// registration USER ADD payment  DATA member REQUEST=============================
+
+app.post("/trust/:id/addpay", (req, res) => {
+  let { id } = req.params;
+  let { userName, name, payment, date } = req.body;
+  // donor.push({ username, name, payment, date });
+
+  const newuser1 = new user1({
+    userName: userName,
+    name: name,
+    payment: payment,
+    date: date,
+  });
+  newuser1
+    .save()
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  res.redirect("/trust/username");
+
+  console.log("new", id, req.body);
+});
+
 // *******************************************
 // *******************************************
 // *******************************************
 
 //  =========******GET REQUEST*******========
 
-// userlist========================================
-app.get("/donor", (req, res) => {
-  res.render("homepage.ejs", { donor });
+// add request ========================================
+app.get("/trust/add/", async (req, res) => {
+  let { userName, passWord } = req.query;
+  let don = await userdetail.find({ userName: userName });
+  const data = don[0];
+  if (data) {
+    res.render("add.ejs", { data });
+    console.log(data);
+  } else {
+    res.render("alert&signup.ejs", { data });
+  }
 
-  console.log("/donor");
+  console.log(data, userName, passWord);
+
+  // res.send(don);
+});
+
+// userlist========================================
+
+app.get("/trust", (req, res) => {
+  res.render("homepage.ejs");
+
+  console.log("/trust");
 });
 
 //login usernam list=============================================
-app.get("/donor/username", (req, res) => {
-  let { username } = req.query;
+app.get("/trust/username", (req, res) => {
+  // let { username } = req.query;
   // let don = donor.find((donor) => username === donor.username);
-  res.render("login.ejs");
-  console.log("/donor/username");
-});
-
-// add request ========================================
-app.get("/donor/add", (req, res) => {
-  // let data = req.params;
-  let { username } = req.query;
-  let don = donor.find((donor) => username === donor.username);
-  let newuser = donor.find((donor) => username !== donor.username);
-  let do1 = donor.filter((donor) => username === donor.username);
-
-  if (don) {
-    res.render("add.ejs", { donor, don, do1 });
-  } else {
-    res.render("loginerror.ejs");
-  }
-
-  console.log("/donor/add", username);
+  res.render("login.ejs",);
+  console.log("/trust/username",username);
 });
 
 // user loging request ========================================
-app.get("/donor/new", (req, res) => {
-  // let data = req.params;
-  let { username } = req.query;
-  let don = donor.find((donor) => username === donor.username);
-  let newuser = donor.find((donor) => username !== donor.username);
-  let do1 = donor.filter((donor) => username === donor.username);
+app.get("/trust/new", (req, res) => {
+ 
+  res.render("alert&signup.ejs");
+  // }
 
-  if (don) {
-    res.render("add.ejs", { donor, don, do1 });
-  } else {
-    res.render("alert&signup.ejs");
-  }
-
-  console.log("/donor/new", username);
+  console.log("/trust/new", username);
 });
 
 // home totallist==================================================
-app.get("/donor/total", (req, res) => {
+app.get("/trust/total", async (req, res) => {
   let username = req.params;
-  res.render("totallist.ejs", { donor });
+  let don = await userdetail.find();
+  res.render("totallist.ejs", { don });
   console.log("total list ");
 });
 
-//search donorform for usernamt=============================================
-app.get("/donor/us", (req, res) => {
-  res.render("searchform.ejs");
-  console.log("/donor/us");
+//search donorform for username=============================================
+app.get("/trust/us", async (req, res) => {
+  let { userName } = req.query;
+  let don = await userdetail.find({ userName: userName });
+
+  res.render("searchform.ejs", { don });
+  console.log(userName);
 });
 
 // SERCH  usernam list=============================================
-
-app.get("/donor/user", (req, res) => {
-  let { username } = req.query;
-  let don = donor.find((donor) => username === donor.username);
-  let newuser = donor.find((donor) => username !== donor.username);
-  let do1 = donor.filter((donor) => username === donor.username);
-
-  if (don) {
-    res.render("useraccount.ejs", { donor, do1 });
+app.get("/trust/user", async (req, res) => {
+  // let data = req.params;
+  let { userName } = req.query;
+  let don = await userdetail.find({ userName: userName });
+  const data = don[0];
+  if (data) {
+    res.render("useraccount.ejs", { don });
   } else {
-    res.render("searchformalert.ejs");
+    res.render("searchformalert.ejs", { don });
   }
 
-  console.log("new serch", "/donor/user");
+  // console.log(data);
 
-  console.log(do1);
+  // res.send(don);
+});
+
+// app.get("/trust/user", async(req, res) => {
+//   let {userName} = req.query.username;
+//   // let don = await userdetail.find({userName:userName});
+//   let don = userdetail.find((v) => userName === userdetail.userName);
+
+//   // res.render("useraccount.ejs",{don} );
+
+//   if (don) {
+//     res.render("useraccount.ejs",{don});
+//   } else {
+//    res.render("searchformalert.ejs",{don});
+//   }
+//   // res.render("searchformalert.ejs", {don });
+//   // console.log("new serch", "/trust/user");
+
+//   console.log(don.userName);
+// });
+
+// =============meddleware page not found======================
+app.use((req, res, next) => {
+  res.send("PAGE NOT FOUND");
 });

@@ -7,59 +7,44 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <%- include("includes/navebar.ejs") %>
+    <%- include("includes/newdonor.ejs") %>
     <div class="homain">
       
       <h1>Donor list</h1>
+      <h5>useraccount.ejs</h5>
 
       <div class="ta">
         <table>
           <thead>
             <tr>
-              <th>username</th>
+              <th>_id</th>
+              <th>userName</th>
+              <th>passWord</th>
               <th>name</th>
-              <th>payment</th>
-              <th>date(dd/mm/yy)</th>
+              <th>city</th>
+              <th>area</th>
+              <th>mobile</th>
+              <th>email</th>
             </tr>
           </thead>
-
-          <tbody>
-            
-            <% for(doner of do1){
-                 %>
-
-            <tr>
-              <td><%=doner.username%></td>
-              <td><%=doner.name%></td>
-              <td><%=doner.payment%></td>
-              <td><%=doner.date%></td>
-            </tr>
-            <tr>
-                  
-                  
-                  
-            </tr>
-              <%} %>
-              
-            </tr>
-          </tbody>
+          <% for(donor of don) { %>
+            <tbody>
+              <tr>
+                <td><%=donor._id%></td>
+                <td><%=donor.userName%></td>
+                <td><%=donor.passWord%></td>
+                <td><%=donor.name%></td>
+                <td><%=donor.city%></td>
+                <td><%=donor.area%></td>
+                <td><%=donor.mobile%></td>
+                <td><%=donor.email%></td>
+              </tr>
+            </tbody>
+            <%}%>
         </table>
 
         <div id="btn">
-          <form method="get" action="/donor">
-            <button class="btn">Homepage</button>
-          </form>
-          <form method="get" action="/donor/username"><button class="btn">loging</button></form>
-
-          <form method="get" action="./delet.ejs"><button class="btn">delet</button></form>
-
-          <form method="get" action="/donor/us">
-            <button class="btn">Search</button>
-          </form>
-
-          <form method="get" action="/donor/total">
-            <button class="btn">total list</button>
-          </form>
+         
         </div>
       </div>
     </div>
