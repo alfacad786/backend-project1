@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const { strict } = require("assert");
 const userdetail = require("./models/userdetail.js");
 const user1 = require("./models/addpayment.js");
+const admindetail = require("./models/admindetail.js");
 //============================================
 async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/trust");
@@ -36,10 +37,10 @@ app.listen(port, () => {
 });
 
 // =============meddleware======================
-app.use("/", (req, res, next) => {
-  console.log("req.path");
-  next();
-});
+// app.use("/", (req, res, next) => {
+//   console.log("req.path");
+//   next();
+// });
 
 // app.use("/trust/user", (req, res, next) => {
 //   console.log("/trust/us");
@@ -57,6 +58,35 @@ app.use("/", (req, res, next) => {
 
 // =============POST REQUEST======================
 // =========================
+// =========new registration member REQUEST=======================================
+app.post("/trust/newadmin/", (req, res) => {
+  // let username = req.params.p.i
+  let { username, password, name, city, area, mobile, email } = req.body;
+
+  const newadmindetail = new admindetail({
+    userName: username,
+    passWord: password,
+    name: name,
+    city: city,
+    area: area,
+    mobile: mobile,
+    email: email,
+  });
+  newadmindetail
+    .save()
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  res.redirect("/trust/newadminregi/");
+
+  // console.log(req.body);
+});
+
+
 // =========================
 // =========new registration member REQUEST=======================================
 app.post("/trust/newmember", (req, res) => {
@@ -88,10 +118,12 @@ app.post("/trust/newmember", (req, res) => {
 
 // registration USER ADD payment  DATA member REQUEST=============================
 
-app.post("/trust/:id/addpay", (req, res) => {
+app.post("/trust/:id/addpay", async(req, res) => {
   let { id } = req.params;
   let { userName, name, payment, date } = req.body;
   // donor.push({ username, name, payment, date });
+  let don = await userdetail.find({ userName: userName });
+  const data = don[0];
 
   const newuser1 = new user1({
     userName: userName,
@@ -107,10 +139,11 @@ app.post("/trust/:id/addpay", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+    
 
-  res.redirect("/trust/username");
+  res.render("add.ejs",{userName, id,data});
 
-  console.log("new", id, req.body);
+  console.log("new", id, req.body,userName);
 });
 
 // *******************************************
@@ -118,23 +151,110 @@ app.post("/trust/:id/addpay", (req, res) => {
 // *******************************************
 
 //  =========******GET REQUEST*******========
+// ====================================================================
+// ====================================================================
+// ============================ADMIN API================================
+// ====================================================================
+// ====================================================================
+// ====================================================================
 
-// add request ========================================
-app.get("/trust/add/", async (req, res) => {
-  let { userName, passWord } = req.query;
+// PRESS ADMINLOGIN BUTTON   ========================================
+app.get("/trust/adminlog/", (req, res) => {
+  // let { username } = req.query;
+  // let don = donor.find((donor) => username === donor.username);
+  res.render("adminlogin.ejs",);
+  console.log("/trust/adminlog/",username);
+});
+
+// ADMINLOGIN request ========================================
+app.get("/trust/adminlog/porter/", async(req, res) => {
+  let { userName } = req.query;
+  let usernam=req.params
+
+  let don = await admindetail.find({ userName: userName });
+  const data = don[0];
+  if (data) {
+    res.render("adminportel.ejs",{ data });
+  } else {
+    res.render("adminloginerror.ejs", {don});
+  }
+  // res.render("userportel.ejs",{ data });
+ console.log(usernam);
+  // console.log("/trust/userportal/",{userName},{ data });
+});
+
+app.get("/trust/newadminregi/", (req, res) => {
+ 
+  res.render("adminRegistration.ejs");
+  // }
+
+  console.log("/trust/newadminregi/");
+});
+
+// ====================================================================
+// ====================================================================
+// ============================USER API================================
+// ====================================================================
+// ====================================================================
+// ====================================================================
+
+
+
+
+// userportal request ========================================
+app.get("/trust/userportal/", async(req, res) => {
+  let { userName } = req.query;
+  let usernam=req.params
+
   let don = await userdetail.find({ userName: userName });
   const data = don[0];
   if (data) {
-    res.render("add.ejs", { data });
+    res.render("userportel.ejs",{ data });
+  } else {
+    res.render("loginerror.ejs", {don});
+  }
+  // res.render("userportel.ejs",{ data });
+ console.log({usernam});
+  // console.log("/trust/userportal/",{userName},{ data });
+});
+
+
+
+app.get("/trust/userportal/:id/", async(req, res) => {
+  
+  let {id}=req.params
+
+
+  let don = await userdetail.findById(id)
+  const data = don;
+  res.render("userportel.ejs",{ data });
+ console.log({id},{data});
+  // console.log("/trust/userportal/",{userName},{ data });
+});
+
+
+
+
+
+// add request ========================================
+app.get("/trust/add/:userName/", async (req, res) => {
+  let { userName } = req.params;
+  let don = await userdetail.find({ userName: userName });
+  const data = don[0];
+  if (data) {
+    res.render("add.ejs",{data});
     console.log(data);
   } else {
     res.render("alert&signup.ejs", { data });
   }
 
-  console.log(data, userName, passWord);
+  console.log(data, userName);
 
   // res.send(don);
 });
+
+
+
 
 // userlist========================================
 
@@ -179,18 +299,18 @@ app.get("/trust/us", async (req, res) => {
 });
 
 // SERCH  usernam list=============================================
-app.get("/trust/user", async (req, res) => {
+app.get("/trust/user/:userName/data", async (req, res) => {
   // let data = req.params;
-  let { userName } = req.query;
-  let don = await userdetail.find({ userName: userName });
+  let { userName } = req.params;
+  let don = await userdetail.find({ userName:userName });
   const data = don[0];
   if (data) {
-    res.render("useraccount.ejs", { don });
+    res.render("useraccount.ejs", {don});
   } else {
-    res.render("searchformalert.ejs", { don });
+    res.render("searchformalert.ejs", {don});
   }
 
-  // console.log(data);
+  console.log(userName);
 
   // res.send(don);
 });
@@ -214,6 +334,6 @@ app.get("/trust/user", async (req, res) => {
 // });
 
 // =============meddleware page not found======================
-app.use((req, res, next) => {
-  res.send("PAGE NOT FOUND");
-});
+// app.use((req, res, next) => {
+//   res.send("PAGE NOT FOUND");
+// });

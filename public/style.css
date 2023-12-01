@@ -91,7 +91,7 @@ body {
   background-color: rgba(145, 93, 82, 0.795);
 }
 nav {
-  width:80%;
+  width:53%;
   height: auto;
   display: flex;
   flex-wrap: wrap;
@@ -101,19 +101,22 @@ nav {
  
 }
 #formhome {
-  width: 20%;
+  width: auto;
   height: auto;
   display: flex;   
   justify-content: center;
   align-items: center;
   align-content: center;
+  margin: 6px;
+  padding: 0px;
+  /* background-color: rgba(253, 232, 228, 0.596); */
   
 }
 #btnhome {
-  width: 80%;
+  width: 100%;
   height:auto;
   border-radius: 4px;
-  padding: 6px;
+  padding: 4px;
   text-transform: uppercase;
   font-family: "sans-serif";
   background-color: #fbff05;
@@ -125,6 +128,7 @@ nav {
   display: flex;   
   justify-content: center;
   align-items: center;
+  margin: 0px;
  
 }
 

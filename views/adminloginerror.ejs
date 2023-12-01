@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LOGING</title>
+    <title>AdminLoginError</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <%- include("includes/homepagenav.ejs") %>
     <div class="homainloging">
-      <h1>PLEASE INSERT THE USERNAME</h1>
+      <h1>PLEASE INSERT THE VALID ADMIN USERNAME</h1>
 
       <div class="addform2">
         <form method="get" action="/trust/add" class="loginform">
@@ -17,11 +17,11 @@
           ><input name="username" type="text" class="inputloging" />
           <label for="password">password :</label
           ><input name="password" type="password" class="inputloging" />
-          <span id="spam" > please valid username or password</span>          
+          <span id="spam" > please valid ADMIN username or password</span>          
           <button class="=btn" type="submit">Loging</button>          
         </form>
         <span> if new user please Regisration</span>
-        <form method="get" action="/trust/new">
+        <form method="get" action="/trust/newadminregi/">
           <button class="btn">REGISTRATION</button>
         </form>
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>admin</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include("includes/userporternav copy.ejs") %>
+
+    <h1 id="h1"> welcomadmin <%=data.name%></h1>
+    <h5 id="h5">userportal.ejs <%=data._id%></h5>
+
+    <form method="get" action="/trust">
+      <button class="=btn" type="submit">logout</button>
+    </form>
+    <form method="get" action="/trust/add/<%=data.userName%>/" id="formhome">
+      <button type="submit" id="btnhome">add payment</button>
+    </form>
+    <form method="get" action="/trust/user/<%=data.userName%>/data">
+      <button class="btn">Search</button>
+    </form>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

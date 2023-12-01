@@ -62,8 +62,11 @@
         </div>
       </form>
       <div id="bott">
-        <button id="btnback">BACK</button>
-        <form method="get" action="/trust/us">
+        <form method="get" action="/trust/userportal/<%=data._id%>/">
+          <button class="=btn" type="submit">BACK</button>
+        </form>
+      
+        <form method="get" action="/trust/user/<%=data.userName%>/data">
           <button class="btn">Search</button>
         </form>
         <form method="get" action="/trust">
