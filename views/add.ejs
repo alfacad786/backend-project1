@@ -62,14 +62,14 @@
         </div>
       </form>
       <div id="bott">
+           
+        <form method="get" action="/trust/user/<%=data.userName%>/profile">
+          <button class="btn">serchProfile</button>
+        </form>
+        <form method="get" action="/trust/user/<%=data.userName%>/contribution">
+          <button class="btn">MyContribution</button>
+        </form>
         <form method="get" action="/trust/userportal/<%=data._id%>/">
-          <button class="=btn" type="submit">BACK</button>
-        </form>
-      
-        <form method="get" action="/trust/user/<%=data.userName%>/data">
-          <button class="btn">Search</button>
-        </form>
-        <form method="get" action="/trust">
           <button class="btn">Homepage</button>
         </form>
       </div>

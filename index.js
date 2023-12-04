@@ -298,8 +298,8 @@ app.get("/trust/us", async (req, res) => {
   console.log(userName);
 });
 
-// SERCH  usernam list=============================================
-app.get("/trust/user/:userName/data", async (req, res) => {
+// SERCH profile  by username =============================================
+app.get("/trust/user/:userName/profile", async (req, res) => {
   // let data = req.params;
   let { userName } = req.params;
   let don = await userdetail.find({ userName:userName });
@@ -311,6 +311,22 @@ app.get("/trust/user/:userName/data", async (req, res) => {
   }
 
   console.log(userName);
+
+  // res.send(don);
+});
+// SERCH contribution  by username =============================================
+app.get("/trust/user/:userName/contribution", async (req, res) => {
+  // let data = req.params;
+  let { userName } = req.params;
+  let don = await user1.find({ userName:userName });
+  const data = don[0];
+  if (data) {
+    res.render("usercontribution.ejs", {don});
+  } else {
+    res.render("searchformalert.ejs", {don});
+  }
+
+  console.log(userName,data, "/trust/user/:userName/contribution");
 
   // res.send(don);
 });
