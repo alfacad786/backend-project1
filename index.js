@@ -163,7 +163,7 @@ app.get("/trust/adminlog/", (req, res) => {
   // let { username } = req.query;
   // let don = donor.find((donor) => username === donor.username);
   res.render("adminlogin.ejs",);
-  console.log("/trust/adminlog/",username);
+  console.log("/trust/adminlog/");
 });
 
 // ADMINLOGIN request ========================================
@@ -269,7 +269,7 @@ app.get("/trust/username", (req, res) => {
   // let { username } = req.query;
   // let don = donor.find((donor) => username === donor.username);
   res.render("login.ejs",);
-  console.log("/trust/username",username);
+  console.log("/trust/username");
 });
 
 // user loging request ========================================
@@ -278,7 +278,7 @@ app.get("/trust/new", (req, res) => {
   res.render("alert&signup.ejs");
   // }
 
-  console.log("/trust/new", username);
+  console.log("/trust/new");
 });
 
 // home totallist==================================================
