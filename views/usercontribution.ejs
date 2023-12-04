@@ -9,9 +9,8 @@
   <body>
     <%- include("includes/newdonor.ejs") %>
     <div class="homain">
-      
-      <h1>Donor list</h1>
-      <h5>useraccount.ejs</h5>
+      <h1>My Contribution</h1>
+      <h5>usercontribution.ejs</h5>
 
       <div class="ta">
         <table>
@@ -19,36 +18,29 @@
             <tr>
               <th>_id</th>
               <th>userName</th>
-              <th>passWord</th>
               <th>name</th>
-              <th>city</th>
-              <th>area</th>
-              <th>mobile</th>
-              <th>email</th>
+              <th>payment</th>
+              <th>date</th>
             </tr>
           </thead>
           <% for(donor of don) { %>
-            <tbody>
-              <tr>
-                <td><%=donor._id%></td>
-                <td><%=donor.userName%></td>
-                <td><%=donor.passWord%></td>
-                <td><%=donor.name%></td>
-                <td><%=donor.city%></td>
-                <td><%=donor.area%></td>
-                <td><%=donor.mobile%></td>
-                <td><%=donor.email%></td>
-              </tr>
-            </tbody>
-            <%}%>
+          <tbody>
+            <tr>
+              <td><%=donor._id%></td>
+              <td><%=donor.userName%></td>
+             
+              <td><%=donor.name%></td>
+              <td><%=donor.payment%></td>
+              <td><%=donor.date%></td>              
+            </tr>
+          </tbody>
+          <%}%>
         </table>
         <form method="get" action="/trust/add/<%=donor.userName%>/">
           <button class="=btn" type="submit">BACK</button>
         </form>
 
-        <div id="btn">
-         
-        </div>
+        <div id="btn"></div>
       </div>
     </div>
   </body>
