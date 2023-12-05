@@ -63,10 +63,10 @@
       </form>
       <div id="bott">
            
-        <form method="get" action="/trust/user/<%=data._id%>/profile/">
+        <form method="post" action="/trust/user/<%=data._id%>/profile/">
           <button class="btn">serchProfile</button>
         </form>
-        <form method="get" action="/trust/user/<%=data.userName%>/contribution">
+        <form method="post" action="/trust/user/<%=data.userName%>/contribution">
           <button class="btn">MyContribution</button>
         </form>
         <form method="post" action="/trust/userportal/<%=data._id%>/">

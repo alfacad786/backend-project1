@@ -372,6 +372,89 @@ input {
   color: #ff0000;
   background-color: #eff2ff;
 }
+/* edit password form============================== */
+.editpassword {
+  width: 40%;
+  height: auto;
+  background-color: #021196;
+  background-color:rgb(170, 105, 93);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  border-radius: 7px;
+  box-shadow: 5px 5px 10px #8692f7;
+  margin: auto;
+  padding: 20px;
+}
+.editform {
+  width: 100%;
+  height: auto;
+  background-color: #0011ad;
+  background-color:rgb(238, 161, 148);
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: center;
+  border-radius: 7px;
+  box-shadow: 5px 5px 10px black;
+  margin: 10px;
+}
+.updateform {
+  width: auto;
+  height: auto;
+  background-color: #0c22e9;
+  background-color:rgb(170, 105, 93);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: right;
+  align-items: center;
+  border-radius: 10px;
+  margin: 20px;
+  color: #eeeeee;
+  border: 3px double white;
+}
+.inputloging {
+  width: 60%;
+  height: auto;
+  border: none;
+  margin: 20px;
+  background-color: #eff2ff;
+  color: #000000;
+}
+#oldpass{
+  width: auto;
+  height: auto; 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: right;
+  align-items: center;
+  color: #eeeeee;
+  padding: 0px;
+}
+#p1{
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0px 18px;
+  color: #ff0000;
+  background-color: #eff2ff;
+
+}
+#spam {
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0px 18px;
+  color: #ff0000;
+  background-color: #eff2ff;
+}
+
+
+
+
+
 /* =============================================================== */
 /* searchform.ejs ================================================= */
 .search {
