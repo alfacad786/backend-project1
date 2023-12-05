@@ -202,33 +202,54 @@ app.get("/trust/newadminregi/", (req, res) => {
 
 
 // userportal request ========================================
-app.get("/trust/userportal/", async(req, res) => {
-  let { userName } = req.query;
-  let usernam=req.params
+app.post("/trust/userportal/", async(req, res) => {
+  let { userName,passWord } = req.body;
+  // let usernam=req.params
 
-  let don = await userdetail.find({ userName: userName });
-  const data = don[0];
-  if (data) {
-    res.render("userportel.ejs",{ data });
-  } else {
-    res.render("loginerror.ejs", {don});
+  let don = await userdetail.findOne({ userName: userName });
+  const data = don;
+  // if (data) {
+  //   res.render("userportel.ejs",{ data });
+  // } else {
+  //   res.render("loginerror.ejs", {don});
+  // }
+
+  if (!don) {
+    console.log("please corect the userName");
+    res.render("loginerror.ejs");   
   }
+  
+ else if (don.passWord !== passWord) {
+    console.log("please corect the password");
+    res.render("loginerror.ejs");
+   
+}
+// else if (data.passWord==passWord) {
+//   console.log("passWord ="+ passWord);
+  
+ 
+// }
+ else{
+  console.log("welcom");
+    res.render("userportel.ejs",{don});
+    console.log(userName,passWord,don,data.area);
+ }
   // res.render("userportel.ejs",{ data });
- console.log({usernam});
+
   // console.log("/trust/userportal/",{userName},{ data });
 });
 
 
 
-app.get("/trust/userportal/:id/", async(req, res) => {
+app.post("/trust/userportal/:id/", async(req, res) => {
   
-  let {id}=req.params
-
-
-  let don = await userdetail.findById(id)
-  const data = don;
-  res.render("userportel.ejs",{ data });
- console.log({id},{data});
+ 
+  let { id } = req.params;
+  let don = await userdetail.findById(id);
+  const data = [don] 
+  
+  res.render("userportel.ejs",{don,data});
+ console.log({id,don});
   // console.log("/trust/userportal/",{userName},{ data });
 });
 
@@ -299,18 +320,20 @@ app.get("/trust/us", async (req, res) => {
 });
 
 // SERCH profile  by username =============================================
-app.get("/trust/user/:userName/profile", async (req, res) => {
+app.get("/trust/user/:id/profile/", async (req, res) => {
   // let data = req.params;
-  let { userName } = req.params;
-  let don = await userdetail.find({ userName:userName });
-  const data = don[0];
-  if (data) {
-    res.render("useraccount.ejs", {don});
-  } else {
+  let { id } = req.params;
+  let don = await userdetail.findById(id);
+  const data = [don]
+
+  if (!don) {
     res.render("searchformalert.ejs", {don});
+   
+  } else {
+    res.render("useraccount.ejs", {data,don});
   }
 
-  console.log(userName);
+  console.log(id,don,data);
 
   // res.send(don);
 });

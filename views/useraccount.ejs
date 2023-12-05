@@ -27,7 +27,7 @@
               <th>email</th>
             </tr>
           </thead>
-          <% for(donor of don) { %>
+          <!-- <% for(donor of data) { %> -->
             <tbody>
               <tr>
                 <td><%=donor._id%></td>
@@ -42,7 +42,7 @@
             </tbody>
             <%}%>
         </table>
-        <form method="get" action="/trust/add/<%=donor.userName%>/">
+        <form method="post" action="/trust/userportal/<%=don.id%>/">
           <button class="=btn" type="submit">BACK</button>
         </form>
 
