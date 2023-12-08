@@ -26,6 +26,16 @@
           />
         </div>
         <div class="d0">
+          <label for="userId">userName : </label>
+          <input
+            name="userId"
+            value="<%=data._id%>"
+            type="text"
+            class="inputaddtop"
+            readonly
+          />
+        </div>
+        <div class="d0">
           <label for="name">Name :</label>
           <input
             name="name"
@@ -63,14 +73,12 @@
       </form>
       <div id="bott">
            
-        <form method="post" action="/trust/user/<%=data._id%>/profile/">
-          <button class="btn">serchProfile</button>
+       
+        <form method="post" action="/trust/user/back/<%=data._id%>/">
+          <button id="btnadd">Homepage</button>
         </form>
-        <form method="post" action="/trust/user/<%=data.userName%>/contribution">
-          <button class="btn">MyContribution</button>
-        </form>
-        <form method="post" action="/trust/userportal/<%=data._id%>/">
-          <button class="btn">Homepage</button>
+        <form method="post" action="/trust/user/back/<%=data._id%>/">
+          <button id="btnadd" type="submit">BACK</button>
         </form>
       </div>
     </div>

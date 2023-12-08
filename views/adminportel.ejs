@@ -10,18 +10,35 @@
   <body>
     <%- include("includes/userporternav copy.ejs") %>
 
-    <h1 id="h1"> welcomadmin <%=data.name%></h1>
-    <h5 id="h5">userportal.ejs <%=data._id%></h5>
+    <h1 id="h1"> welcomadmin <%=don.name%></h1>
+    <h5 id="h5">adminportel.ejs <%=don._id%></h5>
 
     <form method="get" action="/trust">
       <button class="=btn" type="submit">logout</button>
     </form>
-    <form method="get" action="/trust/add/<%=data.userName%>/" id="formhome">
+    <form method="get" action="/trust/add/<%=don.userName%>/" id="formhome">
       <button type="submit" id="btnhome">add payment</button>
     </form>
-    <form method="get" action="/trust/user/<%=data.userName%>/data">
+    <form method="post" action="/trust/admin/<%=don._id%>/profile/">
       <button class="btn">Search</button>
     </form>
+
+
+    <form method="post"  action="/trust/admin/<%=don._id%>/search/">
+     
+    <select name="search" id="select">
+      <option value="">select</option>
+      <option value="Adminlist"  >Total Admin</option>
+      <option value="userlist" >Total User</option>
+      <option value="totalpayment" >Total payment</option>    
+
+    </select>  
+      
+      <button type="submit" class="btn">Search</button>
+    </form>
+
+
+
 
     <script src="/app.js"></script>
   </body>

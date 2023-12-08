@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>knc trust bharuch List</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include("includes/userporternav copy.ejs") %>
+
+    <div class="homain">
+      <h1>Donor list</h1>
+
+      <div class="ta">
+        <table>
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>userName</th>
+              <th>passWord</th>
+              <th>name</th>
+              <th>city</th>
+              <th>area</th>
+              <th>mobile</th>
+              <th>email</th>
+            </tr>
+          </thead>
+          <% for(donor of user) { %>
+          <tbody>
+            <tr>
+              <td><%=donor._id%></td>
+              <td><%=donor.userName%></td>
+              <td><%=donor.passWord%></td>
+              <td><%=donor.name%></td>
+              <td><%=donor.city%></td>
+              <td><%=donor.area%></td>
+              <td><%=donor.mobile%></td>
+              <td><%=donor.email%></td>
+            </tr>
+          </tbody>
+          <%}%>
+        </table>
+        <div id="btn">
+          <form method="post" action="/trust/admin/back/<%=don._id%>/">
+            <button class="=btn" type="submit">BACK</button>
+          </form>
+          <form method="get" action="/trust/username">
+            <button class="btn">Loging</button>
+          </form>
+          <form method="get" action="/trust/total">
+            <button class="btn">total list</button>
+          </form>
+          <form method="get" action="./delet.ejs">
+            <button class="btn">delet</button>
+          </form>
+          <form method="get" action="/trust">
+            <button class="btn">Homepage</button>
+          </form>
+
+          <form method="get" action="/trust/us">
+            <button class="btn">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

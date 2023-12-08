@@ -11,7 +11,7 @@
     <div class="homain">
       
       <h1>My Profile</h1>
-      <h5>useraccount.ejs</h5>
+      <h5>adminProfile.ejs <%=don._id%> </h5>
 
       <div class="ta">
         <table>
@@ -42,7 +42,7 @@
             </tbody>
             <%}%>
         </table>
-        <form method="post" action="/trust/user/back/<%=don._id%>/">
+        <form method="post" action="/trust/admin/back/<%=don._id%>/">
           <button class="=btn" type="submit">BACK</button>
         </form>
 

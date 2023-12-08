@@ -19,11 +19,15 @@
     <form method="post" action="/trust/add/<%=don.userName%>/" id="formhome">
       <button type="submit" id="btnhome">add payment</button>
     </form>
-    <form method="post" action="/trust/user/<%=don._id%>/profile/">
-      <button class="btn">Search</button>
-    </form>
-    <form method="get" action="/trust/userportal/<%=don._id%>/edit/">
+    
+    <form method="get" action="/trust/user/<%=don._id%>/edit/">
       <button class="=btn" type="submit">Change passWord</button>
+    </form>
+    <form method="post" action="/trust/user/<%=don._id%>/profile/">
+      <button id="btnadd">serchProfile</button>
+    </form>
+    <form method="post" action="/trust/user/<%=don._id%>/contribution">
+      <button id="btnadd">MyContribution</button>
     </form>
 
     <script src="/app.js"></script>
