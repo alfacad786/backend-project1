@@ -2,55 +2,65 @@ const { ejs } = require("ejs");
 const express = require("express");
 const userdetail = require("../models/userdetail.js");
 const user1 = require("../models/addpayment.js");
+const admindetail = require("../models/admindetail.js");
 const router = express.Router({ mergeParams: true });
 const methodOverride = require("method-override");
 // user registration page request ========================================
 router.get("/Registration/", (req, res) => {
-      res.render("alert&signup.ejs");
-      // }
-    
-      console.log("/trust/new");
-    });
+  res.render("alert&signup.ejs");
+  // }
+
+  console.log("/trust/new");
+});
 // ======add new registration user in userdetals REQUEST======
-router.post("/addnewuser/", (req, res) => {
+router.post("/addnewuser/", async (req, res) => {
   // let username = req.params.p.i
-  let { username, password, name, city, area, mobile, email } = req.body;
-
-  const newUserdetail = new userdetail({
-    userName: username,
-    passWord: password,
-    name: name,
-    city: city,
-    area: area,
-    mobile: mobile,
-    email: email,
-  });
-  newUserdetail
-    .save()
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
+  let { userName, password, name, city, area, mobile, email } = req.body;
+  let chekuser = await userdetail.findOne({ userName: userName });
+  // let chekadmin = await admindetail.findOne({ userName: userName });
+  if (!chekuser) {
+    const newUserdetail = new userdetail({
+      userName: userName,
+      passWord: password,
+      name: name,
+      city: city,
+      area: area,
+      mobile: mobile,
+      email: email,
     });
-
-  res.redirect("/trust/username");
-  // console.log(req.body);
+    newUserdetail
+      .save()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log(" add data");
+    res.redirect("/trust/user/logpage/");
+    // console.log(" data match");
+  } else {
+    res.render("errer userrejistration.ejs");
+    console.log(" match the userName");
+    console.log(userName, chekuser);
+    // res.render("loginerror.ejs");
+  } 
 });
 
 //loginpage=================================
 router.get("/logpage/", (req, res) => {
-      // let { username } = req.query;
-      // let don = donor.find((donor) => username === donor.username);
-      res.render("login.ejs");
-      console.log("/trust/username");
-    });
+  // let { username } = req.query;
+  // let don = donor.find((donor) => username === donor.username);
+  res.render("login.ejs");
+  console.log("/trust/user/logpage/");
+});
 
 // loging userportal request ========================================
 router.post("/loging/", async (req, res) => {
   let { userName, passWord } = req.body;
   // let usernam=req.params
-  let don = await userdetail.findOne({ userName: userName });
+  // let don = await userdetail.findOne({ userName: userName });
+  let don = await userdetail.find({ userName: userName });
   const data = don;
   if (!don) {
     console.log("please corect the userName");
@@ -135,7 +145,7 @@ router.post("/:id/profile/", async (req, res) => {
   if (!don) {
     res.render("searchformalert.ejs", { don });
   } else {
-    res.render("useraccount.ejs", {data,don});
+    res.render("useraccount.ejs", { data, don });
   }
 
   console.log(id, don, data);
@@ -146,19 +156,17 @@ router.post("/:id/profile/", async (req, res) => {
 // SERCH contribution  by username =============================================
 router.post("/:id/contribution", async (req, res) => {
   // let data = req.params;
-  
+
   let { id } = req.params;
-  let don = await user1.find({userId:id});
- 
- 
+  let don = await user1.find({ userId: id });
+
   if (!don) {
-      res.render("searchformalert.ejs", {don});
-   
+    res.render("searchformalert.ejs", { don });
   } else {
-      res.render("usercontribution.ejs", {don});
+    res.render("usercontribution.ejs", { don });
   }
 
-  console.log(id,don,  "/trust/user/:userName/contribution");
+  console.log(id, don, "/trust/user/:userName/contribution");
 
   // res.send(don);
 });

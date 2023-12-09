@@ -24,6 +24,7 @@
               <th>area</th>
               <th>mobile</th>
               <th>email</th>
+              <th>button</th>
             </tr>
           </thead>
           <% for(donor of user) { %>
@@ -37,6 +38,9 @@
               <td><%=donor.area%></td>
               <td><%=donor.mobile%></td>
               <td><%=donor.email%></td>
+              <td><form method="post" action="/trust/admin/user/<%=donor._id%>?_method=DELETE">
+                <button class="btn">delete</button>
+              </form></td>   
             </tr>
           </tbody>
           <%}%>

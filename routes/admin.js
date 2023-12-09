@@ -118,7 +118,7 @@ router.post("/:id/search/", async (req, res) => {
   console.log(don);
 });
 
-// delet data  request ========================================
+// delet user donetion data  request ========================================
 router.delete("/:id", async (req, res) => {
   let { id } = req.params;
   
@@ -131,6 +131,21 @@ router.delete("/:id", async (req, res) => {
 
   console.log(id,don,delet,userId, "delet");
 });
+
+// delet userprofile and relative doc data  request ========================================
+// router.delete("/user/:id", async (req, res) => {
+//   let { id } = req.params;
+//   let deletuser = await userdetail.findByIdAndDelete(id);
+//   let  userId  = deletuser.id;
+//   // let deletfund = await user1.findByIdAndDelete(id);
+//   // let  userId  = delet.userId  
+//   let don = await user1.find ({ userId : id  });
+//   // let fund = await user1.find();
+//   // // res.redirect("/back/:id/");
+//   // res.render("fund.ejs", { fund, don });
+//   console.log(id,deletuser,userId,don,  "delet");
+//   // console.log(id,don,deletuser,deletfund,userId, "delet");
+// });
 
 //==============================================
 //===================router export==============
