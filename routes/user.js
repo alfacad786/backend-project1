@@ -61,18 +61,20 @@ router.post("/loging/", async (req, res) => {
   // let usernam=req.params
   // let don = await userdetail.findOne({ userName: userName });
   let don = await userdetail.find({ userName: userName });
-  const data = don;
+  const data = don[0];
   if (!don) {
     console.log("please corect the userName");
     res.render("loginerror.ejs");
-  } else if (don.passWord !== passWord) {
+  } else if (data.passWord !== passWord) {
     console.log("please corect the password");
     res.render("loginerror.ejs");
   } else {
     console.log("welcom");
-    res.render("userportel.ejs", { don });
-    console.log(userName, passWord, don, data.area);
+    res.render("userportel.ejs", {data, don });
+    console.log(userName, passWord, don, don.area);
   }
+  console.log(don, userName, data.area);
+  
 });
 
 // edit password ========================================
@@ -128,10 +130,11 @@ router.put("/:id/update/", async (req, res) => {
 router.post("/back/:id/", async (req, res) => {
   let { id } = req.params;
   let don = await userdetail.findById(id);
-  const data = [don];
+  const don1 = [don];
+  const data = don[0];
 
-  res.render("userportel.ejs", { don, data });
-  console.log({ id, don });
+  res.render("userportel.ejs", {data,don, don1 });
+  console.log({ id, don,don1 });
   // console.log("/trust/userportal/",{userName},{ data });
 });
 
@@ -145,7 +148,7 @@ router.post("/:id/profile/", async (req, res) => {
   if (!don) {
     res.render("searchformalert.ejs", { don });
   } else {
-    res.render("useraccount.ejs", { data, don });
+    res.render("useraccount.ejs", { id,data, don });
   }
 
   console.log(id, don, data);

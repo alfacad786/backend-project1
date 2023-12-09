@@ -88,7 +88,7 @@ router.post("/back/:id/", async (req, res) => {
   let don = await admindetail.findById(id);
   const data = [don];
 
-  res.render("adminportel.ejs", { don, data });
+  res.render("adminportel.ejs", {id, don, data });
   console.log({ id, don });
   // console.log("/trust/userportal/",{userName},{ data });
 });
@@ -108,14 +108,37 @@ router.post("/:id/search/", async (req, res) => {
     console.log("adminlist");
     res.render("adminlist.ejs", { admin, don });
   } else if (search === "userlist") {
-    res.render("userlist.ejs", { user, don });
+    res.render("userlist.ejs", {id, user, don });
   } else if (search === "totalpayment") {
     res.render("fund.ejs", { fund, don });
     console.log("totalpayment", fund, don);
     // res.render("searchformalert.ejs", { don });
   }
 
-  console.log(don);
+  console.log(id,"admin :"+don);
+});
+
+
+// delet userprofile and relative doc data  request ========================================
+router.delete("/user/:id", async (req, res) => {
+  let { id } = req.params;
+  let deletuser = await userdetail.findByIdAndDelete(id);
+  let  userId  = deletuser._id;
+  let user = await userdetail.find();
+  // let deletfund = await user1.findByIdAndDelete(id);
+  // let  userId  = delet.userId  
+  let don = await user1.find ({ userId : id  });
+  for (let i = 0; i < user1.length; i++) {
+    let don = await user1.findOneAndDelete ({ userId : id  });
+    console.log(don, "ok delet");
+  }
+  // let fund = await user1.find();
+  // // res.redirect("/back/:id/");
+
+  res.render("userlist.ejs", { user, don });
+
+  console.log(id,deletuser,userId,don,  "delet");
+ 
 });
 
 // delet user donetion data  request ========================================
@@ -132,20 +155,6 @@ router.delete("/:id", async (req, res) => {
   console.log(id,don,delet,userId, "delet");
 });
 
-// delet userprofile and relative doc data  request ========================================
-// router.delete("/user/:id", async (req, res) => {
-//   let { id } = req.params;
-//   let deletuser = await userdetail.findByIdAndDelete(id);
-//   let  userId  = deletuser.id;
-//   // let deletfund = await user1.findByIdAndDelete(id);
-//   // let  userId  = delet.userId  
-//   let don = await user1.find ({ userId : id  });
-//   // let fund = await user1.find();
-//   // // res.redirect("/back/:id/");
-//   // res.render("fund.ejs", { fund, don });
-//   console.log(id,deletuser,userId,don,  "delet");
-//   // console.log(id,don,deletuser,deletfund,userId, "delet");
-// });
 
 //==============================================
 //===================router export==============

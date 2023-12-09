@@ -11,22 +11,22 @@
     <%- include("includes/userporternav copy.ejs") %>
 
     <h1 id="h1">Add donor</h1>
-    <h5 id="h5">userportal.ejs <%=don._id%></h5>
+    <h5 id="h5">userportal.ejs <%=data._id%>%></h5>
 
     <form method="get" action="/trust">
       <button class="=btn" type="submit">logout</button>
     </form>
-    <form method="post" action="/trust/add/<%=don.userName%>/" id="formhome">
+    <form method="post" action="/trust/add/<%=data.userName%>/" id="formhome">
       <button type="submit" id="btnhome">add payment</button>
     </form>
     
-    <form method="get" action="/trust/user/<%=don._id%>/edit/">
+    <form method="get" action="/trust/user/<%=data._id%>/edit/">
       <button class="=btn" type="submit">Change passWord</button>
     </form>
-    <form method="post" action="/trust/user/<%=don._id%>/profile/">
+    <form method="post" action="/trust/user/<%=data._id%>/profile/">
       <button id="btnadd">serchProfile</button>
     </form>
-    <form method="post" action="/trust/user/<%=don._id%>/contribution">
+    <form method="post" action="/trust/user/<%=data._id%>/contribution">
       <button id="btnadd">MyContribution</button>
     </form>
 

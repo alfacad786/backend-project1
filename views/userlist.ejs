@@ -10,7 +10,7 @@
     <%- include("includes/userporternav copy.ejs") %>
 
     <div class="homain">
-      <h1>Donor list</h1>
+      <h1>user profile</h1>
 
       <div class="ta">
         <table>
@@ -46,7 +46,7 @@
           <%}%>
         </table>
         <div id="btn">
-          <form method="post" action="/trust/admin/back/<%=don._id%>/">
+          <form method="post" action="/trust/admin/back/<%=donor._id%>/">
             <button class="=btn" type="submit">BACK</button>
           </form>
           <form method="get" action="/trust/username">
