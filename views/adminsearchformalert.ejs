@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sarch username list</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include("includes/homepagenav.ejs") %>
+    <div class="search">
+      <h1>PLEASE INSERT THE USERNAME</h1>
+
+      <div class="addform3">
+        <form method="get" action="/trust/user" class="searchform">
+          <label for="userName">userName</label
+          ><input name="userName" type="text" class="inputsearch" />
+          <h4 id="h5">Please Enter Valid UserName</h4>
+          <button class="btn">SEARCH</button>
+        </form>
+        <form method="get" action="/trust/total">
+          <button class="btn">total list</button>
+        </form>
+        <form method="get" action="/trust">
+          <button class="btn">Homepage</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -5,14 +5,14 @@ const user1 = require("../models/addpayment.js");
 const admindetail = require("../models/admindetail.js");
 const router = express.Router({ mergeParams: true });
 const methodOverride = require("method-override");
-// user registration page request ========================================
-router.get("/Registration/", (req, res) => {
-  res.render("alert&signup.ejs");
-  // }
 
-  console.log("/trust/new");
-});
-// ======add new registration user in userdetals REQUEST======
+
+//=======================================================
+//=======================================================
+//=======================================================
+
+
+// ======add new user in userdetals REQUEST======
 router.post("/addnewuser/", async (req, res) => {
   // let username = req.params.p.i
   let { userName, password, name, city, area, mobile, email } = req.body;
@@ -47,9 +47,53 @@ router.post("/addnewuser/", async (req, res) => {
   } 
 });
 
+// USER ADD payment  DATA member REQUEST======================
+
+router.post("/:id/addpay", async (req, res) => {
+  let { id } = req.params;
+  let { userName,userId, name, payment, date } = req.body;
+  // donor.push({ username, name, payment, date });
+  let don = await userdetail.findOne({ userName: userName });
+  // const data = don[0];
+  console.log("--payment add request--");
+  const newuser1 = new user1({
+    userName: userName,
+    userId:userId,
+    name: name,
+    payment: payment,
+    date: date,
+  });
+  newuser1
+    .save()
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  res.render("user-add.ejs", { userName, id, don });
+
+  console.log("new", id, req.body, userName);
+});
+
+//=======================================================
+//=======================================================
+//=======================================================
+
+// user registration page request ========================================
+router.get("/Registration/", (req, res) => {
+
+  console.log("--Registration page request--");
+  res.render("alert&signup.ejs");
+   console.log("/trust/new");
+});
+
+
 //loginpage=================================
 router.get("/logpage/", (req, res) => {
   // let { username } = req.query;
+  console.log("--loginpage request--");
   // let don = donor.find((donor) => username === donor.username);
   res.render("login.ejs");
   console.log("/trust/user/logpage/");
@@ -60,21 +104,52 @@ router.post("/loging/", async (req, res) => {
   let { userName, passWord } = req.body;
   // let usernam=req.params
   // let don = await userdetail.findOne({ userName: userName });
-  let don = await userdetail.find({ userName: userName });
-  const data = don[0];
+  console.log("--userportal request--");
+  let don = await userdetail.findOne({ userName: userName });
+  // let data = don[0];
   if (!don) {
     console.log("please corect the userName");
     res.render("loginerror.ejs");
-  } else if (data.passWord !== passWord) {
+  } else if (don.passWord !== passWord) {
     console.log("please corect the password");
     res.render("loginerror.ejs");
   } else {
     console.log("welcom");
-    res.render("userportel.ejs", {data, don });
-    console.log(userName, passWord, don, don.area);
+    res.render("userportel.ejs", { don });
+    console.log(userName, passWord, don);
   }
-  console.log(don, userName, data.area);
+  console.log(don, userName);
   
+});
+// back userportal request ========================================
+
+router.post("/back/:id/", async (req, res) => {
+  let { id } = req.params;
+  let don = await userdetail.findById(id);
+  const data = [don];
+  console.log("--back request--");
+ 
+
+  res.render("userportel.ejs", {id,don, data });
+  console.log({ id, don,data });
+  // console.log("/trust/userportal/",{userName},{ data });
+});
+//payment add request ========================================
+router.post("/add/:userName/", async (req, res) => {
+  let { userName } = req.params;
+  let don = await userdetail.findOne({ userName: userName });
+  // const data = don[0];
+  console.log("-- addpayment button request--");
+  if (don) {
+    res.render("user-add.ejs", { don });
+    console.log(don);
+  } else {
+    res.render("alert&signup.ejs", { don });
+  }
+
+  console.log(don, userName);
+
+  // res.send(don);
 });
 
 // edit password ========================================
@@ -82,6 +157,7 @@ router.get("/:id/edit/", async (req, res) => {
   let { id } = req.params;
   let don = await userdetail.findById(id);
   const data = [don];
+  console.log("--Change Password button request--");
 
   res.render("editpassword.ejs", { don, data });
   console.log("/trust/user/:id/edit/", { id, don, data });
@@ -93,7 +169,7 @@ router.put("/:id/update/", async (req, res) => {
   let { id } = req.params;
   let { oldpassWord, newpassWord, renewpassWord } = req.body;
   let don = await userdetail.findById(id);
-
+  console.log("--update password request--");
   const passWord = don.passWord;
 
   if (!oldpassWord) {
@@ -125,21 +201,11 @@ router.put("/:id/update/", async (req, res) => {
   console.log(req.body, "/trust/userportal/:id/update/");
 });
 
-// back userportal request ========================================
 
-router.post("/back/:id/", async (req, res) => {
-  let { id } = req.params;
-  let don = await userdetail.findById(id);
-  const don1 = [don];
-  const data = don[0];
-
-  res.render("userportel.ejs", {data,don, don1 });
-  console.log({ id, don,don1 });
-  // console.log("/trust/userportal/",{userName},{ data });
-});
 
 // SERCH profile  by username =============================================
 router.post("/:id/profile/", async (req, res) => {
+  console.log("--profile searsh request--");
   // let data = req.params;
   let { id } = req.params;
   let don = await userdetail.findById(id);
@@ -148,7 +214,7 @@ router.post("/:id/profile/", async (req, res) => {
   if (!don) {
     res.render("searchformalert.ejs", { don });
   } else {
-    res.render("useraccount.ejs", { id,data, don });
+    res.render("useraccount.ejs", { data, don });
   }
 
   console.log(id, don, data);
@@ -158,18 +224,20 @@ router.post("/:id/profile/", async (req, res) => {
 
 // SERCH contribution  by username =============================================
 router.post("/:id/contribution", async (req, res) => {
+  console.log("--contribution request--");
   // let data = req.params;
 
+
   let { id } = req.params;
-  let don = await user1.find({ userId: id });
-
+  let don =await userdetail.findById(id);
+  let don1 = await user1.find({ userId: id });
+  const data = don1[0];
   if (!don) {
-    res.render("searchformalert.ejs", { don });
+    res.render("searchformalert.ejs", {data, don1 });
   } else {
-    res.render("usercontribution.ejs", { don });
+    res.render("usercontribution.ejs", {id,data, don1,don });
   }
-
-  console.log(id, don, "/trust/user/:userName/contribution");
+  console.log(id,data, don, "/trust/user/:id/contribution");
 
   // res.send(don);
 });

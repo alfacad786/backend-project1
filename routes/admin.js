@@ -49,7 +49,7 @@ router.get("/logpage/", (req, res) => {
 // ADMIN LOGIN request ========================================
 router.get("/log/porter/", async (req, res) => {
   let { userName } = req.query;
-  let usernam = req.params;
+  // let usernam = req.params;
 
   let don = await admindetail.findOne({ userName: userName });
   // const data = don[0];
@@ -72,7 +72,7 @@ router.post("/:id/profile/", async (req, res) => {
   const data = [don];
 
   if (!don) {
-    res.render("searchformalert.ejs", { don });
+    res.render("adminsearchformalert.ejs", { don });
   } else {
     res.render("adminProfile.ejs", { data, don });
   }
@@ -108,9 +108,9 @@ router.post("/:id/search/", async (req, res) => {
     console.log("adminlist");
     res.render("adminlist.ejs", { admin, don });
   } else if (search === "userlist") {
-    res.render("userlist.ejs", {id, user, don });
+    res.render("admin-userlist copy.ejs", { user, don });
   } else if (search === "totalpayment") {
-    res.render("fund.ejs", { fund, don });
+    res.render("adminfund copy.ejs", { fund, don });
     console.log("totalpayment", fund, don);
     // res.render("searchformalert.ejs", { don });
   }
@@ -135,7 +135,7 @@ router.delete("/user/:id", async (req, res) => {
   // let fund = await user1.find();
   // // res.redirect("/back/:id/");
 
-  res.render("userlist.ejs", { user, don });
+  res.render("admin-userlist copy.ejs", { user, don });
 
   console.log(id,deletuser,userId,don,  "delet");
  
@@ -150,7 +150,7 @@ router.delete("/:id", async (req, res) => {
   let don = await admindetail.findOne({ userId:admindetail._id  });
   let fund = await user1.find();
   // res.redirect("/back/:id/");
-  res.render("fund.ejs", { fund, don });
+  res.render("adminfund copy.ejs", { fund, don });
 
   console.log(id,don,delet,userId, "delet");
 });

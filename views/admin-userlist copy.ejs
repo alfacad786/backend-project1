@@ -13,22 +13,23 @@
     </form>
 
     <div class="homain">
-      <h1>Total Admin List</h1>
+      <h1>Total user List</h1>
+      <h3>admin-userlist copy.ejs</h3>
 
       <div class="ta">
         <table>
           <thead>
             <tr>
               <th>_id</th>
-
               <th>name</th>
               <th>city</th>
               <th>area</th>
               <th>mobile</th>
               <th>email</th>
+              <th>button</th>
             </tr>
           </thead>
-          <% for(donor of admin) { %>
+          <% for(donor of user) { %>
           <tbody>
             <tr>
               <td><%=donor._id%></td>
@@ -37,12 +38,20 @@
               <td><%=donor.area%></td>
               <td><%=donor.mobile%></td>
               <td><%=donor.email%></td>
+              <td>
+                <form
+                  method="post"
+                  action="/trust/admin/user/<%=donor._id%>?_method=DELETE"
+                >
+                  <button class="btn">delete</button>
+                </form>
+              </td>
             </tr>
           </tbody>
           <%}%>
         </table>
         <div id="btn">
-         
+       
         </div>
       </div>
     </div>

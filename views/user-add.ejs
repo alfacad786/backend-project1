@@ -11,25 +11,25 @@
     <%- include("includes/newdonor.ejs") %>
 
     <h1 id="h1">Add donor</h1>
-    <h5 id="h5">add.ejs <%=data._id%></h5>
+    <h5 id="h5">add.ejs <%=don._id%></h5>
 
     <div class="addform">
-      <form method="post" action="/trust/<%=data._id%>/addpay" class="form">
+      <form method="post" action="/trust/user/<%=don._id%>/addpay" class="form">
         <div class="d0">
           <label for="userName">userName : </label>
           <input
             name="userName"
-            value="<%=data.userName%>"
+            value="<%=don.userName%>"
             type="text"
             class="inputaddtop"
             readonly
           />
         </div>
         <div class="d0">
-          <label for="userId">userName : </label>
+          <label for="userId">userId : </label>
           <input
             name="userId"
-            value="<%=data._id%>"
+            value="<%=don._id%>"
             type="text"
             class="inputaddtop"
             readonly
@@ -41,7 +41,7 @@
             name="name"
             type="text"
             class="inputaddtop"
-            value="<%=data.name%>"
+            value="<%=don.name%>"
             readonly
           />
         </div>
@@ -51,7 +51,7 @@
             name="email"
             type="text"
             class="inputaddtop"
-            value="<%=data.email%>"
+            value="<%=don.email%>"
             readonly
           />
         </div>
@@ -74,7 +74,7 @@
       <div id="bott">
            
        
-        <form method="post" action="/trust/user/back/<%=data._id%>/">
+        <form method="post" action="/trust/user/back/<%=don._id%>/">
           <button id="btnadd">Homepage</button>
         </form>
         <form method="post" action="/trust/user/back/<%=don._id%>/">

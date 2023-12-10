@@ -64,35 +64,6 @@ app.listen(port, () => {
 
 
 
-// registration USER ADD payment  DATA member REQUEST=============================
-
-app.post("/trust/:id/addpay", async (req, res) => {
-  let { id } = req.params;
-  let { userName,userId, name, payment, date } = req.body;
-  // donor.push({ username, name, payment, date });
-  let don = await userdetail.find({ userName: userName });
-  const data = don[0];
-
-  const newuser1 = new user1({
-    userName: userName,
-    userId:userId,
-    name: name,
-    payment: payment,
-    date: date,
-  });
-  newuser1
-    .save()
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  res.render("add.ejs", { userName, id, data });
-
-  console.log("new", id, req.body, userName);
-});
 
 // *******************************************
 // *******************************************
@@ -112,22 +83,7 @@ app.post("/trust/:id/addpay", async (req, res) => {
 
 
 
-// add request ========================================
-app.post("/trust/add/:userName/", async (req, res) => {
-  let { userName } = req.params;
-  let don = await userdetail.find({ userName: userName });
-  const data = don[0];
-  if (data) {
-    res.render("add.ejs", { data });
-    console.log(data);
-  } else {
-    res.render("alert&signup.ejs", { data });
-  }
 
-  console.log(data, userName);
-
-  // res.send(don);
-});
 
 // userlist========================================
 
