@@ -11,7 +11,7 @@
     <%- include("includes/userporternav copy.ejs") %>
 
     <h1 id="h1"> welcomadmin <%=don.name%></h1>
-    <h5 id="h5">adminportel.ejs <%=don._id%></h5>
+    <h5 id="h5">adminportel.ejs <%=don._id%> , <%=don.userName%></h5>
 
     <form method="get" action="/trust">
       <button class="=btn" type="submit">logout</button>
@@ -19,12 +19,12 @@
     <form method="get" action="/trust/add/<%=don.userName%>/" id="formhome">
       <button type="submit" id="btnhome">add payment</button>
     </form>
-    <form method="post" action="/trust/admin/<%=don._id%>/profile/">
+    <form method="post" action="/trust/admin/<%=don.userName%>/profile/">
       <button class="btn">MyProfile</button>
     </form>
 
 
-    <form method="post"  action="/trust/admin/<%=don._id%>/search/">
+    <form method="post"  action="/trust/admin/<%=don.userName%>/search/">
      
     <select name="search" id="select">
       <option value="">select</option>

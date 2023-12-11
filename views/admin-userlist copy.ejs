@@ -8,13 +8,13 @@
   </head>
   <body>
     <%- include("includes/userporternav copy.ejs") %>
-    <form method="post" action="/trust/admin/back/<%=don._id%>/">
+    <form method="post" action="/trust/admin/back/<%=don.userName%>/">
       <button id="backbtn" type="submit">BACK</button>
     </form>
 
     <div class="homain">
       <h1>Total user List</h1>
-      <h3>admin-userlist copy.ejs</h3>
+      <h3>admin-userlist copy.ejs <%=don._id%> , <%=don.userName%></h3>
 
       <div class="ta">
         <table>
@@ -29,7 +29,7 @@
               <th>button</th>
             </tr>
           </thead>
-          <% for(donor of user) { %>
+          <% for(donor of alluser) { %>
           <tbody>
             <tr>
               <td><%=donor._id%></td>
@@ -41,7 +41,7 @@
               <td>
                 <form
                   method="post"
-                  action="/trust/admin/user/<%=donor._id%>?_method=DELETE"
+                  action="/trust/admin/user/<%=donor._id%>/<%=don.userName%>/?_method=DELETE"
                 >
                   <button class="btn">delete</button>
                 </form>
