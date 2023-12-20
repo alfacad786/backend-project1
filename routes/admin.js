@@ -26,7 +26,7 @@ router.post("/new", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-  res.redirect("/Registraion/");
+  res.redirect("/trust/admin/Registraion/");
   // console.log(req.body);
 });
 // new ADMIN registration Buttom request ========================================

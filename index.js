@@ -11,13 +11,13 @@ const user1 = require("./models/addpayment.js");
 const methodOverride = require('method-override')
 const admin = require("./routes/admin.js");
 const user = require("./routes/user.js");
+//===================for mongodb connection======================
+const dburl="mongodb+srv://alfacad786:CuKTMKMECdFvvBGW@cluster0.fd8kque.mongodb.net/?retryWrites=true&w=majority"
 
-//============================================
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/trust");
+  await mongoose.connect(dburl);
   //mongodb ke shath connection banane ke liya
 }
-//====================================
 
 main()
   .then((res) => {
@@ -29,7 +29,6 @@ main()
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride('_method'))
@@ -37,7 +36,7 @@ app.use("/trust/admin",admin);
 app.use("/trust/user",user);
 
 // ===========================================================================================
-// =============LISTEN REQUEST=======================================
+// =============LISTEN REQUEST======================
 
 app.listen(port, () => {
   console.log("listen the server");
@@ -68,22 +67,6 @@ app.listen(port, () => {
 // *******************************************
 // *******************************************
 // *******************************************
-
-// ====================================================================
-// ====================================================================
-// ============================USER API================================
-// ====================================================================
-// ====================================================================
-// ====================================================================
-
-
-
-
-
-
-
-
-
 
 // userlist========================================
 
