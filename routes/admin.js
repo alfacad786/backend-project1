@@ -49,17 +49,30 @@ router.get("/logpage/", (req, res) => {
 // ADMIN LOGIN request ========================================
 router.get("/log/porter/", async (req, res) => {
   let { userName } = req.query;
-  // let usernam = req.params;
+  let { passWord } = req.query;
 
-  let don = await admindetail.findOne({ userName: userName });
+  let don = await admindetail.findOne({ userName: userName, passWord:passWord });
   // const data = don[0];
+  
+  // ========================================================
+  let don1 = await admindetail.findOne({ userName: userName });
+  let don2 = await admindetail.findOne({ passWord: passWord });
+  if (!don1) {
+    console.log("please corect the userName");
+  }
+  if (!don2) {
+    console.log("please corect the passWord");
+  }
+  // ========================================================
+
+
   if (don) {
     res.render("adminportel.ejs", { don });
-  } else {
+  } else { console.log("wrong pass");
     res.render("adminloginerror.ejs", { don });
   }
   // res.render("userportel.ejs",{ data });
-  console.log(userName, don);
+  console.log(userName, don,"passWord is:", passWord);
   // console.log("/trust/userportal/",{userName},{ data });
 });
 

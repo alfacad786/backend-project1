@@ -1,3 +1,6 @@
+require('dotenv').config()
+// console.log(process.env)
+
 const { ejs } = require("ejs");
 const express = require("express");
 const app = express();
@@ -12,8 +15,10 @@ const methodOverride = require('method-override')
 const admin = require("./routes/admin.js");
 const user = require("./routes/user.js");
 //===================for mongodb connection======================
-const dburl="mongodb+srv://alfacad786:CuKTMKMECdFvvBGW@cluster0.fd8kque.mongodb.net/?retryWrites=true&w=majority"
 
+
+const dburl=process.env.db_url
+console.log(dburl)
 async function main() {
   await mongoose.connect(dburl);
   //mongodb ke shath connection banane ke liya
@@ -23,7 +28,7 @@ main()
   .then((res) => {
     console.log("conection sussecfull");
   })
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err,console.log("conection sussecfull")));
 
 //=======================================
 

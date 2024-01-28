@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <%- include("includes/userporternav copy.ejs") %>
+    <%- include("includes/userporternavcopy.ejs") %>
           <form method="post" action="/trust/admin/back/<%=don.userName%>/">
         <button id="backbtn" type="submit">BACK</button>
       </form> 
@@ -22,7 +22,7 @@
           <thead>
             <tr>
               <th>userId</th>             
-              <th>userName</th>
+              <th>userName</th>              
               <th>name</th>
               <th>payment</th>
               <th>date</th>
@@ -35,7 +35,7 @@
           <tbody>
             <tr>
               <td><%=donor.userId%></td>
-              <td><%=donor.userName%></td>
+              <td><%=donor.userName%></td>              
               <td><%=donor.name%></td>
               <td><%=donor.payment%></td>
               <td><%=donor.date%></td>

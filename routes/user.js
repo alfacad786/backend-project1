@@ -102,15 +102,31 @@ router.post("/loging/", async (req, res) => {
   // let usernam=req.params
   // let don = await userdetail.findOne({ userName: userName });
   console.log("--userportal request--");
-  let don = await userdetail.findOne({ userName: userName });
+  let don = await userdetail.findOne({
+    userName: userName,
+    passWord: passWord,
+  });
   // let data = don[0];
+  // ========================================================
+  let don1 = await userdetail.findOne({ userName: userName });
+  let don2 = await userdetail.findOne({ passWord: passWord });
+  if (!don1) {
+    console.log("please corect the userName");
+  }
+  if (!don2) {
+    console.log("please corect the passWord");
+  }
+  // ========================================================
+
   if (!don) {
     console.log("please corect the userName");
     res.render("loginerror.ejs");
-  } else if (don.passWord !== passWord) {
-    console.log("please corect the password");
-    res.render("loginerror.ejs");
-  } else {
+  }
+  // else if (don.passWord !== passWord) {
+  //   console.log("please corect the password");
+  //   res.render("loginerror.ejs");
+  // }
+  else {
     console.log("welcom");
     res.render("userportel.ejs", { don });
     console.log(userName, passWord, don);

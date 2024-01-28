@@ -11,8 +11,8 @@ body {
   margin: 0px;
 }
 #backbtn {
-  width: 150px;
-  height: 45px;
+  width: 75px;
+  height: 35px;
   border-radius: 4px;
   padding: 4px 18px;
   text-transform: uppercase;
@@ -24,7 +24,7 @@ body {
   color: #00012e;
   position: fixed;
   top: 110px;
-  right: 15px;
+  right: 10px;
 }
 
 /* homepage ======================== */
