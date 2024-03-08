@@ -11,7 +11,7 @@ function back(params)  {
       return ( location="/donor/username?") ;
 };
 
-btn.addEventListener("click",back);
+// btn.addEventListener("click",back);
 
 
 

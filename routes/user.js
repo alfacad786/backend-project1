@@ -1,11 +1,18 @@
+require("dotenv").config();
 const { ejs } = require("ejs");
 const express = require("express");
+const app = express();
 const userdetail = require("../models/userdetail.js");
 const user1 = require("../models/addpayment.js");
 const admindetail = require("../models/admindetail.js");
 const router = express.Router({ mergeParams: true });
 const methodOverride = require("method-override");
-
+const Razorpay = require("razorpay");
+const bodyparser = require("body-parser");
+app.use(require("body-parser").json);
+const key_id = process.env.key_id;
+const key_secret = process.env.key_secret;
+// let body =document.querySelector("body");
 //=======================================================
 //=======================================================
 //=======================================================
@@ -46,34 +53,61 @@ router.post("/addnewuser/", async (req, res) => {
   }
 });
 
-// USER ADD payment  DATA member REQUEST======================
+// USER ADD payment by razolpay  DATA member REQUEST======================
 
 router.post("/:id/addpay", async (req, res) => {
   let { id } = req.params;
-  let { userName, userId, name, payment, date } = req.body;
-  // donor.push({ username, name, payment, date });
-  let don = await userdetail.findOne({ userName: userName });
-  // const data = don[0];
-  console.log("--payment add request--");
-  const newuser1 = new user1({
-    userName: userName,
-    userId: userId,
-    name: name,
-    payment: payment,
-    date: date,
+  let { userName, userId, name, payment, date, contect, email } = req.body;
+
+
+
+  // ---------------------razolpay payment code start--------------
+
+  console.log(key_id, payment);
+  var instance = new Razorpay({
+    key_id: key_id,
+    key_secret: key_secret,
   });
-  newuser1
-    .save()
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  var option = {
+    amount: payment*100, // amount in the smallest currency unit
+    currency: "INR",
+    receipt: "order_rcptid_11",
+  };
 
-  res.render("user-add.ejs", { userName, id, don });
+  instance.orders.create(option, function (err, order) {   
+    res.render("checkout.ejs", { orderId: order.id ,key_id:key_id, amount: payment,name:name,email:email,contect:contect });
+    console.log(order, "o-id",order.id);
+  });
+   // ---------------------razolpay payment code end--------------
+ 
+  //================================================
 
-  console.log("new", id, req.body, userName);
+  //================================================
+ // ---------------------database save payment code start--------------
+  // donor.push({ username, name, payment, date });
+  // let don = await userdetail.findOne({ userName: userName });
+  // // const data = don[0];
+  // console.log("--payment add request--");
+  // const newuser1 = new user1({
+  //   userName: userName,
+  //   userId: userId,
+  //   name: name,
+  //   payment: payment,
+  //   date: date,
+  // });
+  // newuser1
+  //   .save()
+  //   .then((res) => {
+  //     console.log("res",res,"res");
+  //   })
+  //   .catch((err) => {
+  //     console.log("err",err,"err");
+  //   });
+
+  // res.render("user-add.ejs", { userName, id, don });
+
+  // console.log("new", id, req.body, userName);
+  // ---------------------database save payment code end--------------
 });
 
 //=======================================================

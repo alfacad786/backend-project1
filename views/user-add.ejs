@@ -12,12 +12,21 @@
 
     <h1 id="h1">Add donor</h1>
     <h5 id="h5">add.ejs <%=don._id%></h5>
+    <div id="bott">
+      <form method="post" action="/trust/user/back/<%=don._id%>/">
+        <button id="btnadd">Homepage</button>
+      </form>
 
+      <form method="post" action="/trust/user/back/<%=don._id%>/">
+        <button id="btnadd" type="submit">BACK</button>
+      </form>
+    </div>
     <div class="addform">
       <form method="post" action="/trust/user/<%=don._id%>/addpay" class="form">
         <div class="d0">
           <label for="userName">userName : </label>
           <input
+          id="userName"
             name="userName"
             value="<%=don.userName%>"
             type="text"
@@ -28,6 +37,7 @@
         <div class="d0">
           <label for="userId">userId : </label>
           <input
+          id="userId"
             name="userId"
             value="<%=don._id%>"
             type="text"
@@ -38,16 +48,19 @@
         <div class="d0">
           <label for="name">Name :</label>
           <input
+          id="name"
             name="name"
             type="text"
             class="inputaddtop"
             value="<%=don.name%>"
             readonly
           />
+       
         </div>
         <div class="d0">
           <label for="email">email : </label>
           <input
+          id="email"
             name="email"
             type="text"
             class="inputaddtop"
@@ -55,34 +68,31 @@
             readonly
           />
         </div>
-
+        <label for="contect">Contect :</label>
+        <input
+        id="contect"
+          name="contect"
+          type="number"
+          class="inputaddtop"
+          value="<%=don.mobile%>"
+          readonly
+        />
         <div class="d1">
           <label for="payment">payment : </label
-          ><input name="payment" type="number" class="inputadd" />
+          ><input name="payment" type="number" class="inputadd" id="amount" />
           <label for="date">date : </label
           ><input
+            id="date"
             name="date"
             type="date"
             class="inputadd"
             required
             pattern="\d{2}-\d{2}-\d{4}"
-          />
-
+          />        
           <button class="=btn" type="submit">Add</button>
         </div>
       </form>
-      <div id="bott">
-           
-       
-        <form method="post" action="/trust/user/back/<%=don._id%>/">
-          <button id="btnadd">Homepage</button>
-        </form>
-        <form method="post" action="/trust/user/back/<%=don._id%>/">
-          <button id="btnadd" type="submit">BACK</button>
-        </form>
-      </div>
-    </div>
-
+    </div> 
     <script src="/app.js"></script>
   </body>
 </html>

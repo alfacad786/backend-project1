@@ -3,6 +3,8 @@ require('dotenv').config()
 
 const { ejs } = require("ejs");
 const express = require("express");
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const app = express();
 const port = 8080;
 const path = require("path");
@@ -17,8 +19,9 @@ const user = require("./routes/user.js");
 //===================for mongodb connection======================
 
 
-const dburl=process.env.db_url
+const dburl=process.env.wather_url
 console.log(dburl)
+
 async function main() {
   await mongoose.connect(dburl);
   //mongodb ke shath connection banane ke liya
@@ -28,7 +31,7 @@ main()
   .then((res) => {
     console.log("conection sussecfull");
   })
-  .catch((err) => console.log(err,console.log("conection sussecfull")));
+  .catch((err) => console.log(err,console.log("conection not sussecfull")));
 
 //=======================================
 
@@ -39,6 +42,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride('_method'))
 app.use("/trust/admin",admin);
 app.use("/trust/user",user);
+
+
 
 // ===========================================================================================
 // =============LISTEN REQUEST======================
