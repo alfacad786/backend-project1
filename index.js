@@ -80,7 +80,7 @@ app.listen(port, () => {
 
 // userlist========================================
 
-app.get("/trust", (req, res) => {
+app.get("/", (req, res) => {
   res.render("homepage.ejs");
 
   console.log("/trust");
