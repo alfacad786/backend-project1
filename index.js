@@ -31,7 +31,7 @@ main()
   .then((res) => {
     console.log("conection sussecfull");
   })
-  .catch((err) => console.log(err,"conection not sussecfull"));
+  .catch((err) => console.log(err.codeName,"conection not sussecfull"));
 
 //=======================================
 
