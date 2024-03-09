@@ -83,7 +83,7 @@ app.listen(port, () => {
 app.get("/", (req, res) => {
   res.render("homepage.ejs");
 
-  console.log("/trust");
+  console.log("/");
 });
 
 
