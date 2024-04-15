@@ -149,6 +149,7 @@ nav {
  
 }
 
+
 h2 {
   text-transform: uppercase;
   text-align: center;
@@ -156,7 +157,7 @@ h2 {
   color: #eff2ff;
 }
 .homain {
-  width: auto;
+  width: 70%;
   height: auto;
   background-color: #021196;
   background-color:rgb(170, 105, 93);
@@ -190,15 +191,17 @@ h1 {
 }
 
 table {
-  width: 100%;
+  width: 70%;
   border: 2px;
   border: 1px solid rgb(56, 56, 56);
   background-color: #ffffff60;
   padding: 2px;
-  margin: auto;
+  margin: auto; 
+  
 }
+
 th {
-  width: auto;
+  /* width: 100%; */
   border: 2px;
   border: 1px solid black;
   background-color: #040677;
@@ -207,12 +210,28 @@ th {
   color: wheat;
 }
 td {
-  width: auto;
+  /* width: 100%; */
   border: 1px solid black;
   background-color: #eff2ff;
   padding: 2px;
   text-align: center;
+
 }
+/* @media only screen and (max-width: 800px) {
+  table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  th {
+    width: auto;
+    display: block;
+  }
+  td {
+    width: auto;
+    display: block;
+  }
+} */
 #btn {
   width: 100%;
   height: auto;
@@ -667,3 +686,17 @@ h5 {
   /* background-color:rgb(241, 169, 156); */
 }
 
+.slider-container {
+  width: 100%;
+  /* height: 0px; */
+  overflow: hidden;
+}
+.slider {
+  /* height: 100px; */
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.slide {
+  height: 100px;
+  flex: 0 0 100%;
+}

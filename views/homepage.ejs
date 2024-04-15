@@ -8,9 +8,30 @@
   </head>
   <body>
     <%- include("includes/homepagenav.ejs") %>
+    <div class="slider-container">
+      <div class="slider">
+        <div class="slide"><img src="/photo/DSC_0215.JPG" alt="Slide 1"></div>
+        <div class="slide"><img src="/public/photo/DSC_0233.JPG"" alt="Slide 2"></div>
+        <div class="slide"><img src="/public/photo/DSC_0234.JPG"" alt="Slide 3"></div>
+      </div>
+    </div>
     <h5>Instruction</h5>
     <p>New User Please Click Hear and Registration First</p> <form method="get" action="/trust/user/Registration/" id="formhome">
       <button type="submit" id="btnhome">User Registration</button>
     </form> 
+    <script>
+      const slider = document.querySelector('.slider');
+      let counter = 0;
+  
+      function slide() {
+        counter++;
+        if (counter === slider.children.length) {
+          counter = 0;
+        }
+        slider.style.transform = `translateX(${-counter * 100}%)`;
+      }
+  
+      setInterval(slide, 3000); // Change slide every 3 seconds
+    </script>
   </body>
 </html>

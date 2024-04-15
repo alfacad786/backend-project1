@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { ejs } = require("ejs");
 const express = require("express");
+
 const app = express();
 const userdetail = require("../models/userdetail.js");
 const user1 = require("../models/addpayment.js");
@@ -12,6 +13,13 @@ const bodyparser = require("body-parser");
 app.use(require("body-parser").json);
 const key_id = process.env.key_id;
 const key_secret = process.env.key_secret;
+const emailApiToken = process.env.emailApiToken;
+const EmailParams = require("mailersend").EmailParams;
+const Sender = require("mailersend");
+
+const { MailerSend, Recipient } = require('mailersend');
+const mailersend = new MailerSend({ api_key: emailApiToken });
+// import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 // let body =document.querySelector("body");
 //=======================================================
 //=======================================================
@@ -58,12 +66,10 @@ router.post("/addnewuser/", async (req, res) => {
 router.post("/:id/addpay", async (req, res) => {
   let { id } = req.params;
   let { userName, userId, name, payment, date, contect, email } = req.body;
-
-
-
+  let don = await userdetail.findOne({ userName: userName });
   // ---------------------razolpay payment code start--------------
 
-  console.log(key_id, payment);
+  //  console.log(key_id, payment);
   var instance = new Razorpay({
     key_id: key_id,
     key_secret: key_secret,
@@ -75,38 +81,55 @@ router.post("/:id/addpay", async (req, res) => {
   };
 
   instance.orders.create(option, function (err, order) {   
-    res.render("checkout.ejs", { orderId: order.id ,key_id:key_id, amount: payment,name:name,email:email,contect:contect });
+    res.render("checkout.ejs", { orderId: order.id ,key_id:key_id, amount: payment,name:name,email:email,contect:contect ,don});
     console.log(order, "o-id",order.id);
   });
-   // ---------------------razolpay payment code end--------------
- 
+  // ---------------------razolpay payment code end--------------
+
   //================================================
 
   //================================================
- // ---------------------database save payment code start--------------
-  // donor.push({ username, name, payment, date });
+  // ---------------------database save payment code start--------------
+  // donor.push({ userName, name, payment, date });
   // let don = await userdetail.findOne({ userName: userName });
-  // // const data = don[0];
-  // console.log("--payment add request--");
-  // const newuser1 = new user1({
-  //   userName: userName,
-  //   userId: userId,
-  //   name: name,
-  //   payment: payment,
-  //   date: date,
-  // });
-  // newuser1
-  //   .save()
-  //   .then((res) => {
-  //     console.log("res",res,"res");
-  //   })
-  //   .catch((err) => {
-  //     console.log("err",err,"err");
-  //   });
+  // const data = don[0];
+  console.log("--payment add request--");
+  const newuser1 = new user1({
+    userName: userName,
+    userId: userId,
+    name: name,
+    payment: payment,
+    date: date,
+  });
+  newuser1
+    .save()
+    .then((res) => {
+      console.log("res", res, "res");
 
+      // --------------------send email------------------------
+
+      // --------------------------------------------
+    })
+    .catch((err) => {
+      console.log("err", err, "err");
+    });
+  // const mailersend = new MailerSend({
+  //   api_key: emailApiToken,
+  // });
+  // const sentFrom = new Sender("alfa_cad786@yahoo.com", "asifiqbal");
+  // const recipients = [new Recipient(email, name)];
+  // const emailParams = new EmailParams()
+  //   .setFrom(sentFrom)
+  //   .setTo(recipients)
+  //   .setReplyTo(sentFrom)
+  //   .setSubject("This is a Subject")
+  //   .setHtml("<strong>This is the HTML content</strong>")
+  //   .setText("This is the text content");
+  //   await mailersend.send(emailParams);
+  // console.log(emailParams);
   // res.render("user-add.ejs", { userName, id, don });
 
-  // console.log("new", id, req.body, userName);
+  console.log("new", id, req.body, userName);
   // ---------------------database save payment code end--------------
 });
 
@@ -161,11 +184,35 @@ router.post("/loging/", async (req, res) => {
   //   res.render("loginerror.ejs");
   // }
   else {
+
+// --------------------------------------------
+
+
+// const recipients = [new Recipient(don.email, don.name)];
+
+// const personalization = [
+//   {
+//     email: don.email,
+//     data: {
+//       name: don.name
+//     },
+//   }
+// ];
+// const emailParams = new EmailParams()
+// emailParams.setFrom("info@domain.com")
+// emailParams.setFromName("Your Name")
+// emailParams.setRecipients(recipients)
+// emailParams.setSubject("Subject")
+// emailParams.setTemplateId('k68zxl22dv3lj905')
+// emailParams.setPersonalization(personalization);
+
+// mailersend.send(emailParams);
+// ------------------------------------
     console.log("welcom");
     res.render("userportel.ejs", { don });
-    console.log(userName, passWord, don);
+    console.log(userName, passWord, don.name);
   }
-  console.log(don, userName);
+  console.log(don.email, userName);
 });
 // back userportal request ========================================
 
