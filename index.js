@@ -49,7 +49,7 @@ app.use("/trust/user",user);
 // =============LISTEN REQUEST======================
 
 app.listen(port, () => {
-  console.log("listen the server");
+  console.log(`listen the server to:  http://localhost:${port}`);
 });
 
 // =============meddleware======================
@@ -83,7 +83,7 @@ app.listen(port, () => {
 app.get("/", (req, res) => {
   res.render("homepage.ejs");
 
-  console.log("/");
+  console.log("-/-");
 });
 
 

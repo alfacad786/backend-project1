@@ -8,7 +8,10 @@ const user1 = require("../models/addpayment.js");
 // =========new registration member REQUEST=======================================
 router.post("/new", (req, res) => {
   // let username = req.params.p.i
+  
   let { username, password, name, city, area, mobile, email } = req.body;
+
+
   const newadmindetail = new admindetail({
     userName: username,
     passWord: password,

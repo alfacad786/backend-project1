@@ -28,9 +28,13 @@ const mailersend = new MailerSend({ api_key: emailApiToken });
 // ======add new user in userdetals REQUEST======
 router.post("/addnewuser/", async (req, res) => {
   // let username = req.params.p.i
+  
   let { userName, password, name, city, area, mobile, email } = req.body;
+
   let chekuser = await userdetail.findOne({ userName: userName });
-  // let chekadmin = await admindetail.findOne({ userName: userName });
+
+
+
   if (!chekuser) {
     const newUserdetail = new userdetail({
       userName: userName,

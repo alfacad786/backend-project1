@@ -37,7 +37,8 @@ body {
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 20px;
-  position: fixed;
+  position:fixed;
+  z-index: 10;
 }
 #logo {
   width: 30%;
@@ -663,8 +664,9 @@ h5 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 120px;
-  z-index: -1;
+  position:absolute;
+  top:100px;
+  z-index: 1;
 }
 .slider-container {
   background-color: rgba(10, 20, 15, 0.699);

@@ -8,7 +8,8 @@
   </head>
   <body>
     <%- include("includes/homepagenav.ejs") %>
-    <div class="homebody" >
+
+    <div class="homebody">
       <div class="slider-container">
         <div class="slider">
           <div class="slide">
@@ -41,28 +42,25 @@
         
         </div>
       </div>
-      <div class="UserRegistration">
-        <h5>Instruction</h5>
-        <p>New User Please Click Hear and Registration First</p>
-        <form method="get" action="/trust/user/Registration/" id="formhome">
-          <button type="submit" id="btnhome">User Registration</button>
+
+      <nav>
+        <form method="get" action="/">
+          <button class="=btn" type="submit">BACK</button>
         </form>
-      </div>
-      <div class="UserRegistration">
-        <h5>Instruction</h5>
-        <p>New User Please Click Hear and Registration First</p>
-        <form method="get" action="/trust/user/Registration/" id="formhome">
-          <button type="submit" id="btnhome">User Registration</button>
-        </form>
-      </div>
-      <div class="UserRegistration">
-        <h5>Instruction</h5>
-        <p>New User Please Click Hear and Registration First</p>
-        <form method="get" action="/trust/user/Registration/" id="formhome">
-          <button type="submit" id="btnhome">User Registration</button>
-        </form>
-      </div>
+
+        <div class="UserRegistration">
+          <h5>Instruction</h5>
+          <p>New User Please Click Hear and Registration First</p>
+
+          <form method="get" action="/trust/user/Registration/" id="formhome">
+            <button type="submit" id="btnhome">User Registration</button>
+          </form>
+        </div>
+      </nav>
     </div>
+
+
+
     <script>
       const slider = document.querySelector(".slider");
       let counter = 0;
