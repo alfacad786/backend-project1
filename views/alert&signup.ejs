@@ -10,82 +10,40 @@
     <%- include("includes/homepagenav.ejs") %>
     <div class="errerform">
       <h2 id="h2">INVALID USERNAME PLEASE SIGN UP</h2>
-      <div class="homain1">
-        <h3 id="h3">NEW MEMBER REGISTRATION</h3>
-        <h5 id="h5">alert&sigup.ejs</h5>
+      <h3 id="h3">NEW MEMBER REGISTRATION</h3>
+      <h5 id="h5">alert&sigup.ejs</h5>
 
-        <div class="newaddform">
-          <form method="post" action="/trust/user/addnewuser/" class="signupform">
-            <div class="subdiv">
-              <label for="userName">userName :</label
-              ><input 
-              name="userName" 
-              type="text" 
-              id="userinput" 
-              class="inp" 
-              />
+      <form method="post" action="/trust/user/addnewuser/" class="signupform">
+        <div class="subdiv">
+          <label for="userName">userName :</label
+          ><input name="userName" type="text" id="userinput" class="inp" />
 
-              <label for="name">name :</label
-              ><input 
-              name="name" 
-              type="text" 
-              id="name" 
-              class="inp" 
-              />
+          <label for="name">name :</label
+          ><input name="name" type="text" id="name" class="inp" />
 
-              <label for="email">Email :</label
-              ><input 
-              name="email" 
-              type="email" 
-              id="email" 
-              class="inp" 
-              />
+          <label for="email">Email :</label
+          ><input name="email" type="email" id="email" class="inp" />
 
-              <label for="city"> city : </label>
-              <input 
-              name="city" 
-              type="text" 
-              id="city" 
-              class="inp" 
-              />
-            </div>
-            <div class="subdiv">
-              <label for="password">password :</label
-              ><input
-                name="password"
-                type="password"
-                id="password"
-                class="inp"
-              />
-              <label for="mobile"> Mobile : </label
-              >
-              <input 
-              name="mobile" 
-              type="number" 
-              id="mobile" 
-              class="inp" 
-              />
-
-              <label for="area"> area : </label
-              >
-              <input 
-              name="area" 
-              type="text" 
-              id="area" 
-              class="inp" 
-              />
-            </div>
-
-            <button class="=btn" type="submit">singup</button>
-          </form>
-
-          <div id="btn">
-            
-            <form method="get" action="/">
-              <button class="=btn" type="submit">BACK</button>
-            </form>
-          </div>
+          <label for="city"> city : </label>
+          <input name="city" type="text" id="city" class="inp" />
         </div>
+        <div class="subdiv">
+          <label for="password">password :</label
+          ><input name="password" type="password" id="password" class="inp" />
+          <label for="mobile"> Mobile : </label>
+          <input name="mobile" type="number" id="mobile" class="inp" />
+
+          <label for="area"> area : </label>
+          <input name="area" type="text" id="area" class="inp" />
+        </div>
+
+        <button class="=btn" type="submit">singup</button>
+      </form>
+
+      <div id="btn">
+        <form method="get" action="/">
+          <button class="=btn" type="submit">BACK</button>
+        </form>
       </div>
     </div>
   </body>
