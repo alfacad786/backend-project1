@@ -19,7 +19,7 @@ const user = require("./routes/user.js");
 //===================for mongodb connection======================
 
 
-const dburl=process.env.wather_url
+const dburl=process.env.database_url
 console.log(dburl)
 
 async function main() {
@@ -31,7 +31,7 @@ main()
   .then((res) => {
     console.log("conection sussecfull");
   })
-  .catch((err) => console.log(err.codeName,"conection not sussecfull"));
+  .catch((err) => console.log(err.codeNameerr,"conection not sussecfull"));
 
 //=======================================
 
