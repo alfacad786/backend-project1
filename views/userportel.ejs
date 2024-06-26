@@ -9,31 +9,31 @@
   </head>
   <body>
     <%- include("includes/homepagenav.ejs") %>
-
-    <h1 id="h1">Add donor</h1>
-    <h5 id="h5">userportal.ejs <%=don._id%>%></h5>
-
-    <form method="get" action="/">
-      <button class="=btn" type="submit">logout</button>
-    </form>
-    
-
-    <form method="post" action="/trust/user/add/<%=don.userName%>/" id="formhome">
-      <button type="submit" id="btnhome">add payment</button>
-    </form>
-
-
-    
-    <form method="get" action="/trust/user/<%=don._id%>/edit/">
-      <button class="=btn" type="submit">Change passWord</button>
-    </form>
-    <form method="post" action="/trust/user/<%=don._id%>/profile/">
-      <button id="btnadd">serchProfile</button>
-    </form>
-    <form method="post" action="/trust/user/<%=don._id%>/contribution">
-      <button id="btnadd">MyContribution</button>
-    </form>
-
+    <div class="homain">
+      <h1 id="h1">Welcome <%=don.name%></h1>
+      <h5 id="h5">userportal.ejs <%=don._id%>%></h5>
+      <!-- ======================================================= -->
+      <form method="get" action="/">
+        <button class="=btn" type="submit">logout</button>
+      </form>
+      <!-- ======================================================= -->
+      <form method="post" action="/trust/user/add/<%=don.userName%>/"id="formhome">
+        <button type="submit" id="btnhome">add payment</button>
+      </form>
+      <!-- ======================================================= -->
+      <form method="get" action="/trust/user/<%=don._id%>/edit/">
+        <button class="=btn" type="submit">Change passWord</button>
+      </form>
+      <!-- ======================================================= -->
+      <form method="post" action="/trust/user/<%=don._id%>/profile/">
+        <button id="btnadd">serchProfile</button>
+      </form>
+      <!-- ======================================================= -->
+      <form method="post" action="/trust/user/<%=don._id%>/contribution">
+        <button id="btnadd">MyContribution</button>
+      </form>
+      <!-- ======================================================= -->
+    </div>
     <script src="/app.js"></script>
   </body>
 </html>

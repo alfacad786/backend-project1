@@ -1,10 +1,10 @@
-require('dotenv').config()
+require("dotenv").config();
 // console.log(process.env)
 
 const { ejs } = require("ejs");
 const express = require("express");
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const app = express();
 const port = 8080;
 const path = require("path");
@@ -12,26 +12,34 @@ const mongoose = require("mongoose");
 const { strict } = require("assert");
 const userdetail = require("./models/userdetail.js");
 const user1 = require("./models/addpayment.js");
-
-const methodOverride = require('method-override')
+const { MongoClient } = require("mongodb");
+const methodOverride = require("method-override");
 const admin = require("./routes/admin.js");
 const user = require("./routes/user.js");
+// import { MongoClient } from "mongodb";
 //===================for mongodb connection======================
 
+const dburl = process.env.Db_test_Url;
+console.log(dburl);
 
-const dburl=process.env.database_url
-console.log(dburl)
+//=======================================
+
+const mongodbconect=mongoose.connect(dburl);
+
 
 async function main() {
-  await mongoose.connect(dburl);
-  //mongodb ke shath connection banane ke liya
+  await mongodbconect;
 }
-
 main()
   .then((res) => {
     console.log("conection sussecfull");
+   
   })
-  .catch((err) => console.log(err.codeNameerr,"conection not sussecfull"));
+  .catch((err) => console.log(err, "conection not sussecfull"));
+
+
+
+
 
 //=======================================
 
@@ -39,11 +47,9 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(methodOverride('_method'))
-app.use("/trust/admin",admin);
-app.use("/trust/user",user);
-
-
+app.use(methodOverride("_method"));
+app.use("/trust/admin", admin);
+app.use("/trust/user", user);
 
 // ===========================================================================================
 // =============LISTEN REQUEST======================
@@ -70,10 +76,6 @@ app.listen(port, () => {
 //   res.redirect("/trust/username");
 // });
 
-
-
-
-
 // *******************************************
 // *******************************************
 // *******************************************
@@ -85,10 +87,6 @@ app.get("/", (req, res) => {
 
   console.log("-/-");
 });
-
-
-
-
 
 // home totallist==================================================
 app.get("/trust/total", async (req, res) => {
@@ -106,9 +104,6 @@ app.get("/trust/us", async (req, res) => {
   res.render("searchform.ejs", { don });
   console.log(userName);
 });
-
-
-
 
 // app.get("/trust/user", async(req, res) => {
 //   let {userName} = req.query.username;

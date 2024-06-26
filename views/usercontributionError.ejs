@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>knc trust bharuch List</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <%- include("includes/newdonor.ejs") %>
+    <div class="homain">
+      <h1>My Contribution</h1>
+      <h5>usercontributionError.ejs  <%=don._id%></h5>
+
+      <div class="ta">
+        <h3>Donot have any Contribution</h3>
+        <form method="post" action="/trust/user/back/<%=don._id%>">
+          <button class="=btn" type="submit">BACK</button>
+        </form>
+
+        <div id="btn"></div>
+      </div>
+    </div>
+  </body>
+</html>

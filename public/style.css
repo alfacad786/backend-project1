@@ -161,6 +161,8 @@ h2 {
   box-shadow: 5px 5px 10px #8692f7;
   margin: auto;
   padding: 20px;
+  position: relative;
+  top: 150px;
 }
 h1 {
   text-transform: uppercase;

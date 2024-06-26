@@ -325,12 +325,12 @@ router.post("/:id/contribution", async (req, res) => {
   let don = await userdetail.findById(id);
   let don1 = await user1.find({ userId: id });
   const data = don1[0];
-  if (!don) {
-    res.render("searchformalert.ejs", { data, don1 });
+  if (!data) {
+    res.render("usercontributionError.ejs", { don });
   } else {
     res.render("usercontribution.ejs", { id, data, don1, don });
   }
-  console.log(id, data, don, "/trust/user/:id/contribution");
+  console.log(id, "data:", data,"don",don, "/trust/user/:id/contribution");
 
   // res.send(don);
 });
