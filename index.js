@@ -19,7 +19,7 @@ const user = require("./routes/user.js");
 // import { MongoClient } from "mongodb";
 //===================for mongodb connection======================
 
-const dburl = process.env.Db_test_Url;
+const dburl =Db_test_Url;
 console.log(dburl);
 
 //=======================================
