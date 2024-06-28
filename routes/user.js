@@ -55,7 +55,7 @@ router.post("/addnewuser/", async (req, res) => {
       });
 
     console.log(" add data");
-    res.redirect("/trust/user/logpage/");
+    res.redirect("/");
     // console.log(" data match");
   } else {
     res.render("errer userrejistration.ejs");

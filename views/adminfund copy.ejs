@@ -8,52 +8,47 @@
   </head>
   <body>
     <%- include("includes/userporternavcopy.ejs") %>
-          <form method="post" action="/trust/admin/back/<%=don.userName%>/">
-        <button id="backbtn" type="submit">BACK</button>
-      </form> 
-    
+    <form method="post" action="/trust/admin/back/<%=don.userName%>/">
+      <button id="backbtn" type="submit">BACK</button>
+    </form>
 
     <div class="homain">
-      <h1>Total donetion list</h1> 
- 
+      <h1>Total donetion list</h1>
 
-      <div class="ta">
-        <table>
-          <thead>
-            <tr>
-              <th>userId</th>             
-              <th>userName</th>              
-              <th>name</th>
-              <th>payment</th>
-              <th>date</th>
-              <th>_id</th>
-              <th>button</th>
-            
-            </tr>
-          </thead>
-          <% for(donor of fund) { %>
-          <tbody>
-            <tr>
-              <td><%=donor.userId%></td>
-              <td><%=donor.userName%></td>              
-              <td><%=donor.name%></td>
-              <td><%=donor.payment%></td>
-              <td><%=donor.date%></td>
-              <td><%=donor._id%></td>
-              <td><form method="post" action="/trust/admin/<%=donor._id%>?_method=DELETE">
+      <table>
+        <thead>
+          <tr>
+            <th>userId</th>
+            <th>userName</th>
+            <th>name</th>
+            <th>payment</th>
+            <th>date</th>
+            <th>_id</th>
+            <th>button</th>
+          </tr>
+        </thead>
+        <% for(donor of fund) { %>
+        <tbody>
+          <tr>
+            <td><%=donor.userId%></td>
+            <td><%=donor.userName%></td>
+            <td><%=donor.name%></td>
+            <td><%=donor.payment%></td>
+            <td><%=donor.date%></td>
+            <td><%=donor._id%></td>
+            <td>
+              <form
+                method="post"
+                action="/trust/admin/<%=donor._id%>?_method=DELETE"
+              >
                 <button class="btn">delete</button>
-              </form></td>              
-            </tr>
-            
-          </tbody>
-          <%}%>
-        </table>
-        <div id="btn">
-           
-        
-         
-        </div>
-      </div>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+        <%}%>
+      </table>
+      <div id="btn"></div>
     </div>
   </body>
 </html>

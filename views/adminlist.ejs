@@ -15,39 +15,35 @@
     <div class="homain">
       <h1>Total Admin List</h1>
 
-      <div class="ta">
-        <table>
-          <thead>
-            <tr>
-              <th>_id</th>
-              <th>userName</th>
-              <th>passWord</th>
-              <th>name</th>
-              <th>city</th>
-              <th>area</th>
-              <th>mobile</th>
-              <th>email</th>
-            </tr>
-          </thead>
-          <% for(donor of admin) { %>
-          <tbody>
-            <tr>
-              <td><%=donor._id%></td>
-              <td><%=donor.userName%></td>
-              <td><%=donor.passWord%></td>             
-              <td><%=donor.name%></td>
-              <td><%=donor.city%></td>
-              <td><%=donor.area%></td>
-              <td><%=donor.mobile%></td>
-              <td><%=donor.email%></td>
-            </tr>
-          </tbody>
-          <%}%>
-        </table>
-        <div id="btn">
-         
-        </div>
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>_id</th>
+            <th>userName</th>
+            <th>passWord</th>
+            <th>name</th>
+            <th>city</th>
+            <th>area</th>
+            <th>mobile</th>
+            <th>email</th>
+          </tr>
+        </thead>
+        <% for(donor of admin) { %>
+        <tbody>
+          <tr>
+            <td><%=donor._id%></td>
+            <td><%=donor.userName%></td>
+            <td><%=donor.passWord%></td>
+            <td><%=donor.name%></td>
+            <td><%=donor.city%></td>
+            <td><%=donor.area%></td>
+            <td><%=donor.mobile%></td>
+            <td><%=donor.email%></td>
+          </tr>
+        </tbody>
+        <%}%>
+      </table>
+      <div id="btn"></div>
     </div>
   </body>
 </html>

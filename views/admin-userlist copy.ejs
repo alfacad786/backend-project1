@@ -8,54 +8,49 @@
   </head>
   <body>
     <%- include("includes/userporternavcopy.ejs") %>
-    
 
     <div class="homain">
       <h1>Total user List</h1>
       <h3>admin-userlist copy.ejs <%=don._id%> , <%=don.userName%></h3>
 
-      <div class="ta">
-        <table>
-          <thead>
-            <tr>
-              <th>_id</th>
-              <th>userName</th>
-              <th>passWord</th>
-              <th>name</th>
-              <th>city</th>
-              <th>area</th>
-              <th>mobile</th>
-              <th>email</th>
-              <th>button</th>
-            </tr>
-          </thead>
-          <% for(donor of alluser) { %>
-          <tbody>
-            <tr>
-              <td><%=donor._id%></td>
-              <td><%=don.userName%></td>
-              <td><%=don.passWord%></td>
-              <td><%=donor.name%></td>
-              <td><%=donor.city%></td>
-              <td><%=donor.area%></td>
-              <td><%=donor.mobile%></td>
-              <td><%=donor.email%></td>
-              <td>
-                <form
-                  method="post"
-                  action="/trust/admin/user/<%=donor._id%>/<%=don.userName%>/?_method=DELETE"
-                >
-                  <button class="btn">delete</button>
-                </form>
-              </td>
-            </tr>
-          </tbody>
-          <%}%>
-        </table>
-        <div id="btn">
-       
-        </div>
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>_id</th>
+            <th>userName</th>
+            <th>passWord</th>
+            <th>name</th>
+            <th>city</th>
+            <th>area</th>
+            <th>mobile</th>
+            <th>email</th>
+            <th>button</th>
+          </tr>
+        </thead>
+        <% for(donor of alluser) { %>
+        <tbody>
+          <tr>
+            <td><%=donor._id%></td>
+            <td><%=donor.userName%></td>
+            <td><%=donor.passWord%></td>
+            <td><%=donor.name%></td>
+            <td><%=donor.city%></td>
+            <td><%=donor.area%></td>
+            <td><%=donor.mobile%></td>
+            <td><%=donor.email%></td>
+            <td>
+              <form
+                method="post"
+                action="/trust/admin/user/<%=donor._id%>/<%=don.userName%>/?_method=DELETE"
+              >
+                <button class="btn">delete</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+        <%}%>
+      </table>
+      <div id="btn"></div>
     </div>
     <form method="post" action="/trust/admin/back/<%=don.userName%>/">
       <button id="backbtn" type="submit">BACK</button>
