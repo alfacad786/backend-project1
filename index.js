@@ -32,7 +32,7 @@ async function main() {
 }
 main()
   .then((res) => {
-    console.log("conection sussecfull");
+    console.log("conection sussecfull and good");
    
   })
   .catch((err) => console.log(err, "conection not sussecfull"));
